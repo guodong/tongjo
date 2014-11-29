@@ -1,3 +1,4 @@
 <?php
-chdir("/var/web/vhost/tongjo/");
-system("git pull origin master");
+echo chdir("/var/web/vhost/tongjo/");
+echo "<br>";
+echo system("git pull origin master");
