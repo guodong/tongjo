@@ -1,3 +1,3 @@
 <?php
-chroot("/var/web/vhost/tongjo/");
+chdir("/var/web/vhost/tongjo/");
 system("git pull origin master");
