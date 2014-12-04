@@ -8,10 +8,10 @@
 		<meta name="copyright" content="Copyright by GetClouder. All Rights Reserved." />
 		<meta name="Classification" content="clouds" />
 		<meta name="referrer" content="never">
-		<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800|Inconsolata|Lora:700&subset=latin,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
-
+		
 					
-				<link rel="stylesheet" type="text/css" href="https://d1c9xzpx3cuiic.cloudfront.net/css/3bd9a12-ae6bb5e.css" />
+				<link rel="stylesheet" type="text/css" href="/css/style.css" />
+				<link rel="stylesheet" type="text/css" href="/css/site.css" />
 		
 		
 		<script type="text/javascript" src="https://diwuwwxmqm2em.cloudfront.net/js/d69a8d3-dc8837d.js"></script>
@@ -56,7 +56,7 @@
 				<div class="pass">
 					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0" y="0" viewBox="576 384 1152 1408" xml:space="preserve"><path fill="#FFFFFF" d="M896 1024h512V832c0-70.666-25-131-75-181s-110.334-75-181-75c-70.667 0-131 25-181 75s-75 110.334-75 181V1024zM1728 1120v576c0 26.667-9.334 49.334-28 68 -18.667 18.667-41.334 28-68 28H672c-26.667 0-49.334-9.333-68-28 -18.667-18.666-28-41.333-28-68v-576c0-26.666 9.333-49.333 28-68 18.666-18.666 41.333-28 68-28h32V832c0-122.666 44-228 132-316s193.333-132 316-132c122.666 0 228 44 316 132s132 193.334 132 316v192h32c26.666 0 49.333 9.334 68 28C1718.666 1070.667 1728 1093.334 1728 1120z"/></svg>					<input type="password" name="password" id="password" value="" placeholder="Password" class="input icon" />
 				</div>
-				<a href="" class="big-button grlue" id="signupSubmit">Sign Up Free</a>
+				<a href="" class="big-button home btn" id="signupSubmit">Sign Up Free</a>
 			</form>
 			<p>No long-time commitment. Pay as you go.</p>
 		</section>
@@ -203,55 +203,6 @@
 		</div>
 	</div>
 </section>		
-		<script>
-			/* Crazy Egg */
-			setTimeout(function(){var a=document.createElement("script");
-			var b=document.getElementsByTagName("script")[0];
-			a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0017/3442.js?"+Math.floor(new Date().getTime()/3600000);
-			a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-
-			/*Google Analytics */
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-			ga('create', 'UA-52256045-1', 'getclouder.com');
-			ga('send', 'pageview');
-			/* AdWords */
-
-			/* AdRoll */
-			adroll_adv_id = "R7CCD2ZXIBAFNF2LDQQRBP";
-			adroll_pix_id = "PWD4HY53IFCPPG5XYTCH2H";
-			(function () {
-			var oldonload = window.onload;
-			window.onload = function(){
-			__adroll_loaded=true;
-			var scr = document.createElement("script");
-			var host = (("https:" == document.location.protocol) ?
-			"https://s.adroll.com" : "http://a.adroll.com");
-			scr.setAttribute('async', 'true');
-			scr.type = "text/javascript";
-			scr.src = host + "/j/roundtrip.js";
-			((document.getElementsByTagName('head') || [null])[0] ||
-			document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
-			if(oldonload){oldonload()}};
-			}());
-		</script>
-
-		<script type="text/javascript">
-			/* <![CDATA[ */
-			var google_conversion_id = 962364391;
-			var google_custom_params = window.google_tag_params;
-			var google_remarketing_only = true;
-			/* ]]> */
-		</script>
-
-		<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
-				<noscript>
-			<div style="display:inline;">
-				<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/962364391/?value=0&amp;guid=ON&amp;script=0"/>
-			</div>
-		</noscript>
 
 	</body>
 </html>
