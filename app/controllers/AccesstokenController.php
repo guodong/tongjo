@@ -1,12 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Input;
-class UserController extends BaseController {
+class AccesstokenController extends BaseController {
 
 	public function index()
 	{
-		$users = User::all();
-		return $users->toJson();
+		$user = User::whereRaw('email = ? and password = ?', array(Input::get('email'), md5(Input::get('password'))))->first();
+
+		if($user){
+		    return $user->toJson();
+		}else{
+		    return json_encode(array('error'=>1));
+		}
 	}
 	
 	public function show($id)
@@ -21,7 +26,6 @@ class UserController extends BaseController {
 
 	public function store()
 	{
-	    $_POST['password'] = md5($_POST['password']);
 	    $user = User::create($_POST);
 	    return $user->toJson();
 	}
