@@ -3,12 +3,14 @@
 use Illuminate\Support\Facades\Input;
 class UserController extends BaseController {
 
+    // GET /user
 	public function index()
 	{
 		$users = User::all();
 		return $users->toJson();
 	}
 	
+	// GET /user/$id
 	public function show($id)
 	{
 	    $user = User::find($id);
@@ -19,6 +21,7 @@ class UserController extends BaseController {
 	    }
 	}
 
+	// POST /user
 	public function store()
 	{
 	    $_POST['password'] = md5($_POST['password']);
@@ -26,6 +29,7 @@ class UserController extends BaseController {
 	    return $user->toJson();
 	}
 	
+	// PUT /user/$id
 	public function update($id)
 	{
 	    $user = User::find($id);
