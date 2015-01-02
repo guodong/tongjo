@@ -15,6 +15,8 @@ class UserController extends BaseController {
 	{
 	    $user = User::find($id);
 	    if($user){
+	        $user->school;
+	        $user->major;
 	        return $user->toJson();
 	    }else{
 	        return json_encode(array('error'=>1));

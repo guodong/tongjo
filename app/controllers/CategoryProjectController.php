@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Input;
-class ProjectController extends BaseController {
+class CategoryProjectController extends BaseController {
 
-	public function index()
+	public function index($category_id)
 	{
-		$projects = Project::all();
-		return $projects->toJson();
+	    $category = Category::find($category_id);
+	    return $category->projects->toJson();
 	}
 	
 	public function show($id)
@@ -18,10 +18,6 @@ class ProjectController extends BaseController {
 	public function store()
 	{
 	    $project = Project::create(Input::get());
-	    foreach (Input::get('categorys') as $v){
-	        $project->categorys()->attach($v);
-	    }
-	    //$project->categorys()-sync(Input::get('categorys'));
 	    return $project->toJson();
 	}
 	

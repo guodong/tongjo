@@ -1,12 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Input;
-class ProjectController extends BaseController {
+class UserTeamController extends BaseController {
 
-	public function index()
+	public function index($user_id)
 	{
-		$projects = Project::all();
-		return $projects->toJson();
+	    $user = User::find($user_id);
+		
+		return $user->joinedTeams->toJson();
 	}
 	
 	public function show($id)
@@ -18,10 +19,6 @@ class ProjectController extends BaseController {
 	public function store()
 	{
 	    $project = Project::create(Input::get());
-	    foreach (Input::get('categorys') as $v){
-	        $project->categorys()->attach($v);
-	    }
-	    //$project->categorys()-sync(Input::get('categorys'));
 	    return $project->toJson();
 	}
 	
