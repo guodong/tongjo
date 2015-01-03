@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Cache;
 class AccesstokenController extends BaseController {
 
 	public function index()
@@ -8,35 +9,13 @@ class AccesstokenController extends BaseController {
 		$user = User::whereRaw('email = ? and password = ?', array(Input::get('email'), md5(Input::get('password'))))->first();
 
 		if($user){
+		    $token = md5($user->id.time());
+		    Cache::put($user->id, $user, 10);
+		    $user->accesstoken = $token;
 		    return $user->toJson();
 		}else{
 		    return json_encode(array('error'=>1));
 		}
 	}
 	
-	public function show($id)
-	{
-	    $user = User::find($id);
-	    if($user){
-	        return $user->toJson();
-	    }else{
-	        return json_encode(array('error'=>1));
-	    }
-	}
-
-	public function store()
-	{
-	    $user = User::create($_POST);
-	    return $user->toJson();
-	}
-	
-	public function update($id)
-	{
-	    $user = User::find($id);
-	    foreach (Input::get() as $k=>$v){
-	        $user->{$k} = $v;
-	    }
-	    $user->save();
-	    return $user->toJson();
-	}
 }

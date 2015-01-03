@@ -23,8 +23,9 @@ class TeamController extends BaseController
 
     public function store ()
     {
-        $project = Team::create(Input::get());
-        return $project->toJson();
+        $team = Team::create(Input::get());
+        $team->members()->attach(Input::get("user_id"));
+        return $team->toJson();
     }
 
     public function update ($id)
