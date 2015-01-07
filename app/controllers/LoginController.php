@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Cache;
-class AccesstokenController extends BaseController {
+class LoginController extends BaseController {
 
 	public function index()
 	{
