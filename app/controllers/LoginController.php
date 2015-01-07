@@ -6,11 +6,16 @@ class LoginController extends BaseController {
 
 	public function index()
 	{
-		/*Login test*/
-		$result = array('result' => true, 'message' => 'no problem', 'user' => array('userId'=>1, 'email'=>'pt@tongjo.com', 'realName'=>'彭涛', 'gender'=>1));
-		$jsonstring = json_encode($result);
-		header('Content-Type: application/json');
-		echo $jsonstring;
+		$user = User::whereRaw('email = ? and password = ?', array(Input::get('email'), md5(Input::get('password'))))->first();		
+		if($user){
+		    $token = md5($user->id.time());
+		    Cache::put($user->id, $user, 10);
+		    $user->accesstoken = $token;
+		    $response = array('result' => array('code' =>0, 'message' => 'no problem'), 'user' => array('userId'=>$user->id, 'email'=>$user->email, 'realName'=>$user->realname, 'gender'=>$user->gender));
+		    return $response->toJson();
+		}else{
+		    return json_encode(array('result' => array('code' =>1, 'message' => 'problem 1')));
+		}
 	}
 
 }
