@@ -17,4 +17,18 @@ Route::get('/', function()
 });
 Route::resource('user', 'UserController');
 Route::resource('project', 'ProjectController');
+Route::resource('user.type.project', 'UserTypeProjectController');
 Route::resource('accesstoken', 'AccesstokenController');
+Route::resource('category.project', 'CategoryProjectController');
+Route::resource('user.team', 'UserTeamController');
+Route::resource('team.user', 'TeamUserController');
+Route::resource('category', 'CategoryController');
+Route::resource('team', 'TeamController');
+Route::resource('school', 'SchoolController');
+Route::resource('major', 'MajorController');
+Route::resource('team.user.status', 'TeamUserStatusController');
+Route::resource('image', 'ImageController');
+
+Route::resource('login', 'LoginController');
+
+

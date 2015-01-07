@@ -1,12 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Input;
-class ProjectController extends BaseController {
+class MajorController extends BaseController {
 
 	public function index()
 	{
-		$projects = Project::all();
-		return $projects->toJson();
+	    return Major::all()->toJson();
 	}
 	
 	public function show($id)

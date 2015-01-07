@@ -1,12 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Input;
-class ProjectController extends BaseController {
+class MajorController extends BaseController {
 
 	public function index()
 	{
-		$projects = Project::all();
-		return $projects->toJson();
+	    return Major::all()->toJson();
 	}
 	
 	public function show($id)
@@ -18,12 +17,10 @@ class ProjectController extends BaseController {
 	
 	public function store()
 	{
-	    $project = Project::create(Input::get());
-	    foreach (Input::get('categorys') as $v){
-	        $project->categorys()->attach($v);
-	    }
-	    //$project->categorys()-sync(Input::get('categorys'));
-	    return $project->toJson();
+	    $fn = time().'.jpg';
+	    $dst = PATH_BASE.'public/files/'.$fn;
+	    move_uploaded_file($_FILES['image']['tmp_name'], $dst);
+	    return json_encode(array('result'=>0, 'path'=>'/files/'.$fn));
 	}
 	
 	public function update($id)
