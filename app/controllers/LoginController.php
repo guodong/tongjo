@@ -12,7 +12,7 @@ class LoginController extends BaseController {
 		    Cache::put($user->id, $user, 10);
 		    $user->accesstoken = $token;
 		    $response = array('result' => array('code' =>0, 'message' => 'no problem'), 'user' => array('userId'=>$user->id, 'email'=>$user->email, 'realName'=>$user->realname, 'gender'=>$user->gender));
-		    return $response->toJson();
+		    return json_encode($response);
 		}else{
 		    return json_encode(array('result' => array('code' =>1, 'message' => 'problem 1')));
 		}
