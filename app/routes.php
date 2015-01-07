@@ -26,3 +26,5 @@ Route::resource('category', 'CategoryController');
 Route::resource('team', 'TeamController');
 Route::resource('school', 'SchoolController');
 Route::resource('major', 'MajorController');
+Route::resource('login', 'LoginController');
+
