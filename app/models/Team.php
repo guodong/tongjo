@@ -11,7 +11,7 @@ class Team extends Eloquent {
 	
 	public function members()
 	{
-	    return $this->belongsToMany('User', 'user_team');
+	    return $this->belongsToMany('User', 'user_team')->withTimestamps();;
 	}
 
 }

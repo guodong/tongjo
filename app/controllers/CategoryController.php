@@ -5,6 +5,10 @@ class CategoryController extends BaseController {
 
 	public function index()
 	{
+	    if (Input::get("all")){
+	        $cates = Category::all();
+	        return $cates->toJson();
+	    }
 		$cates = Category::where('fid', '=', 0)->get();
 		$cates->each(function($cate){
 		    $cate->children;
