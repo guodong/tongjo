@@ -5,7 +5,7 @@
  * @package  Laravel
  * @author   Taylor Otwell <taylorotwell@gmail.com>
  */
-
+define('PATH_BASE', realpath('../') . '/');
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
