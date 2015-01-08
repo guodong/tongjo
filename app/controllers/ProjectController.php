@@ -13,6 +13,7 @@ class ProjectController extends BaseController {
 	{
 	    $project = Project::find($id);
 	    $project->categorys;
+	    $project->creator;
 	    return $project->toJson();
 	}
 	

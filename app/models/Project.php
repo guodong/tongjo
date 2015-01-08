@@ -12,4 +12,9 @@ class Project extends Eloquent {
 	{
 	    return $this->belongsToMany('Category', 'project_category');
 	}
+	
+	public function creator()
+	{
+	    return $this->belongsTo('User', 'user_id');
+	}
 }
