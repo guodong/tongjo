@@ -6,7 +6,7 @@ class ProjectController extends BaseController {
 	public function index()
 	{
 		$projects = Project::all();
-		return $projects->toJson();
+		return $projects;
 	}
 	
 	public function show($id)
@@ -14,6 +14,7 @@ class ProjectController extends BaseController {
 	    $project = Project::find($id);
 	    $project->categorys;
 	    $project->creator;
+	    
 	    return $project->toJson();
 	}
 	
@@ -23,7 +24,6 @@ class ProjectController extends BaseController {
 	    foreach (Input::get('categorys') as $v){
 	        $project->categorys()->attach($v);
 	    }
-	    //$project->categorys()-sync(Input::get('categorys'));
 	    return $project->toJson();
 	}
 	

@@ -6,7 +6,6 @@ class TeamUserController extends BaseController {
 	public function index($team_id)
 	{
 	    $team = Team::find($team_id);
-		
 		return $team->members->toJson();
 	}
 	

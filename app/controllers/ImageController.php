@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Input;
-class MajorController extends BaseController {
+class ImageController extends BaseController {
 
 	public function index()
 	{
@@ -19,8 +19,10 @@ class MajorController extends BaseController {
 	{
 	    $fn = time().'.jpg';
 	    $dst = PATH_BASE.'public/files/'.$fn;
-	    move_uploaded_file($_FILES['image']['tmp_name'], $dst);
-	    return json_encode(array('result'=>0, 'path'=>'/files/'.$fn));
+	    $img = str_replace('data:image/png;base64,', '', Input::get('image'));
+	    $data = base64_decode($img);
+	    file_put_contents($dst, $data);
+	    return json_encode(array('result'=>0, 'path'=>'files/'.$fn));
 	}
 	
 	public function update($id)

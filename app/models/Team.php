@@ -11,7 +11,8 @@ class Team extends Eloquent {
 	
 	public function members()
 	{
-	    return $this->belongsToMany('User', 'user_team')->withTimestamps();;
+	    return $this->belongsToMany('User', 'user_team')->withTimestamps()->withPivot('status');
 	}
 
+	
 }

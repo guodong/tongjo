@@ -18,7 +18,12 @@ class TeamUserStatusController extends BaseController {
 	public function update($team_id, $user_id, $status)
 	{
 	    $team = Team::find($team_id);
-	    $team->members()->sync(array($user_id=>array('status'=>$status)));
+	    foreach ($team->members as $v){
+	        if ($v->id == $user_id){
+	            $v->pivot->status = $status;
+	            $v->pivot->save();
+	        }
+	    }
 	    return $team->toJson();
 	}
 
