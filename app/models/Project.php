@@ -8,6 +8,11 @@ class Project extends Eloquent {
 	    return $this->hasMany('Team');
 	}
 	
+	public function showTeams()
+	{
+		return $this->hasMany('Team');
+	}
+	
 	public function categorys()
 	{
 	    return $this->belongsToMany('Category', 'project_category');

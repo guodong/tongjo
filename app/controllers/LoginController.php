@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Response as Responses;
 class LoginController extends BaseController {
 
 	public function index()
@@ -11,11 +12,10 @@ class LoginController extends BaseController {
 		    $token = md5($user->id.time());
 		    Cache::put($user->id, $user, 10);
 		    $user->accesstoken = $token;
-		    $response = array('result' => array('code' =>0, 'message' => 'no problem'), 'user' => array('userId'=>$user->id, 'email'=>$user->email, 'realName'=>$user->realname, 'gender'=>$user->gender));
-		    header("Content-type: text/json");
-		    return json_encode($response);
+		    $response = array('result' => array('code' =>0, 'message' => 'no problem'), 'user' => array('userId'=>(int)$user->id, 'email'=>$user->email, 'realName'=>$user->realname, 'gender'=>(int)$user->gender));
+			return Responses::json($response);
 		}else{
-		    return json_encode(array('result' => array('code' =>1, 'message' => 'problem 1')));
+		    return Responses::json(array('result' => array('code' =>1, 'message' => 'problem 1')));
 		}
 	}
 
