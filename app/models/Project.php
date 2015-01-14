@@ -18,13 +18,4 @@ class Project extends Eloquent {
 	    return $this->belongsTo('User', 'user_id');
 	}
 	
-	public function teamFounder()
-	{
-		return $this->hasOne('User');
-	}
-	
-	public function teamFounderSchool()
-	{
-		return $this->belongsTo('School', 'user_id');
-	}
 }
