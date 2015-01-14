@@ -8,11 +8,6 @@ class Project extends Eloquent {
 	    return $this->hasMany('Team');
 	}
 	
-	public function showTeams()
-	{
-		return $this->hasMany('Team');
-	}
-	
 	public function categorys()
 	{
 	    return $this->belongsToMany('Category', 'project_category');
@@ -21,5 +16,15 @@ class Project extends Eloquent {
 	public function creator()
 	{
 	    return $this->belongsTo('User', 'user_id');
+	}
+	
+	public function teamFounder()
+	{
+		return $this->hasOne('User');
+	}
+	
+	public function teamFounderSchool()
+	{
+		return $this->belongsTo('School', 'user_id');
 	}
 }

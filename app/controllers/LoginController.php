@@ -12,7 +12,7 @@ class LoginController extends BaseController {
 		    $token = md5($user->id.time());
 		    Cache::put($user->id, $user, 10);
 		    $user->accesstoken = $token;
-		    $response = array('result' => array('code' =>0, 'message' => 'no problem'), 'user' => array('userId'=>(int)$user->id, 'email'=>$user->email, 'realName'=>$user->realname, 'gender'=>(int)$user->gender));
+		    $response = array('result' => array('code' =>0, 'message' => 'no problem'), 'user' => array('userId'=> $user->id, 'email'=>$user->email, 'realName'=>$user->realname, 'gender'=> $user->gender));
 			return Responses::json($response);
 		}else{
 		    return Responses::json(array('result' => array('code' =>1, 'message' => 'problem 1')));
