@@ -20,7 +20,7 @@ Route::resource('project', 'ProjectController');
 Route::resource('user.type.project', 'UserTypeProjectController');
 Route::resource('accesstoken', 'AccesstokenController');
 Route::resource('category.project', 'CategoryProjectController');
-Route::resource('user.team', 'UserTeamController');
+Route::resource('user.type.team', 'UserTypeTeamController');
 Route::resource('team.user', 'TeamUserController');
 Route::resource('category', 'CategoryController');
 Route::resource('team', 'TeamController');

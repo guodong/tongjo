@@ -18,14 +18,16 @@ class TeamController extends BaseController
             $v->school;
             $v->major;
         }
+        $m->project;
         return $m->toJson();
     }
 
     public function store ()
     {
         $team = Team::create(Input::get());
+        
         $team->members()->attach(Input::get("user_id"), array('status' => 'permited'));
-        return $team->toJson();
+        return $team;
     }
 
     public function update ($id)

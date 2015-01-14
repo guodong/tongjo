@@ -2,7 +2,7 @@
 class Team extends Eloquent {
 	protected $table = 'team';
 
-	protected $fillable = array('name', 'user_id', 'teammember_all', 'teammember_current', 'description', 'is_signup', 'signup_time');
+	protected $fillable = array('name', 'user_id', 'project_id', 'is_solo', 'teammember_all', 'teammember_current', 'description', 'is_signup', 'signup_time');
 	
 	public function project()
 	{
