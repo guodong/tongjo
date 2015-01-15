@@ -15,12 +15,6 @@ class ProjectUserController extends BaseController {
 	    $project->users()->attach(Input::get('user_id'));
 	    return $project;
 	}
-	
-	public function update($id)
-	{
-	    $project = Project::find($id);
-	    $project->update(Input::get());
-	    return $project->toJson();
-	}
+
 
 }

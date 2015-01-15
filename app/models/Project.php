@@ -21,6 +21,6 @@ class Project extends Eloquent {
 	//个人参加的用户
 	public function users()
 	{
-	    return $this->belongsToMany('User', 'user_project');
+	    return $this->belongsToMany('User', 'user_project')->withTimestamps();
 	}
 }
