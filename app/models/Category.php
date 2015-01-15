@@ -1,6 +1,7 @@
 <?php
 class Category extends Eloquent {
 	protected $table = 'category';
+	protected $fillable = array('name', 'user_id', 'type', 'dsc', 'deadline', 'parttype');
 	
 	public function projects()
 	{

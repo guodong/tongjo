@@ -29,6 +29,7 @@ Route::resource('major', 'MajorController');
 Route::resource('team.user.status', 'TeamUserStatusController');
 Route::resource('image', 'ImageController');
 Route::resource('projectdetail', 'ProjectDetailController');
+Route::resource('projectlist', 'ProjectListController');
 Route::resource('login', 'LoginController');
 
 
