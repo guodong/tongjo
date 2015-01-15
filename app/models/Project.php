@@ -1,7 +1,7 @@
 <?php
 class Project extends Eloquent {
 	protected $table = 'project';
-	protected $fillable = array('name', 'user_id', 'type', 'description', 'sponsor', 'deadline', 'parttype');
+	protected $fillable = array('name', 'user_id', 'type', 'description', 'sponsor', 'deadline', 'parttype', 'is_open');
 
 	public function teams()
 	{
@@ -18,4 +18,9 @@ class Project extends Eloquent {
 	    return $this->belongsTo('User', 'user_id');
 	}
 	
+	//个人参加的用户
+	public function users()
+	{
+	    return $this->belongsToMany('User', 'user_project');
+	}
 }

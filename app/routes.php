@@ -17,6 +17,7 @@ Route::get('/', function()
 });
 Route::resource('user', 'UserController');
 Route::resource('project', 'ProjectController');
+Route::resource('project.user', 'ProjectUserController');
 Route::resource('user.type.project', 'UserTypeProjectController');
 Route::resource('accesstoken', 'AccesstokenController');
 Route::resource('category.project', 'CategoryProjectController');
