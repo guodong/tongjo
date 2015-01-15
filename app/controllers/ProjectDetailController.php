@@ -1,11 +1,13 @@
 <?php
 use Illuminate\Support\Facades\Response as Responses;
+use Illuminate\Support\Facades\Input;
 
 class ProjectDetailController extends BaseController {
 
-	public function show($id)
+	public function index()
 	{
-		$project = Project::find($id);
+		//$project = Project::find($id);
+		$project = Project::whereRaw('id = ?', array(Input::get('id')))->first();
 		$teams = $project->teams;
 		$creator = $project->creator;
 		$latestTeam = $teams->sortBy('created_at')->last();
