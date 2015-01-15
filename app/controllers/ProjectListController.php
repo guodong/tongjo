@@ -6,7 +6,7 @@ class ProjectListController extends BaseController {
 
 	public function index()
 	{
-		$category = Category::whereRaw('id = ?', array(Input::get('id')))->first();
+		$category = Category::whereRaw('id = ?', array(Input::get('categoryId')))->first();
 		$projects = $category->projects;
 		$count = count($projects);
 		for ($i = 0 ; $i <= $count-1; $i++)
