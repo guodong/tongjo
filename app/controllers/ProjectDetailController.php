@@ -40,12 +40,11 @@ class ProjectDetailController extends BaseController {
 							  		'latestTeamDate' => date($latestTeam->created_at), 
 							  		'latestTeamMemberAll' => $latestTeam->teammember_all, 
 							  		'latestTeamMemberNow' => $latestTeam->teammember_current))
-							  //'team' => $latestTeam)
 							  );
 			return Responses::json($response);
 		}else{
 			return Responses::json(array('result' => array('code' =>1, 'message' => 'problem 1')));
 		}
 	}
-
+	
 }
