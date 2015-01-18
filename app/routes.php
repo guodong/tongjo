@@ -32,5 +32,5 @@ Route::resource('user.avatar', 'UserAvatarController');
 Route::resource('projectdetail', 'ProjectDetailController');
 Route::resource('projectlist', 'ProjectListController');
 Route::resource('login', 'LoginController');
-
+Route::resource('project.team', 'ProjectTeamController'); //获取参加某项目的团队
 
