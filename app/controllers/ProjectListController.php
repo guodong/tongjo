@@ -7,7 +7,7 @@ class ProjectListController extends BaseController {
 	public function index()
 	{
 		$category = Category::whereRaw('id = ?', array(Input::get('categoryId')))->first();
-		if (Input::get('categoryId') != NULL)
+		if (Input::get('categoryId') != 0 && Input::get('categoryId') != NULL)
 		{
 			$projects = $category->projects;
 			$count = count($projects);
@@ -42,7 +42,7 @@ class ProjectListController extends BaseController {
 		}
 		else
 		{
-			$projects = Project::all();
+			$projects = Project::Paginate(20);
 			$count = count($projects);
 			for ($i = 0 ; $i <= $count-1; $i++)
 			{
