@@ -7,7 +7,7 @@ class ProjectDetailController extends BaseController {
 	public function index()
 	{
 		//$project = Project::find($id);
-		$project = Project::whereRaw('id = ?', array(Input::get('id')))->first();
+		$project = Project::whereRaw('id = ?', array(Input::get('projectId')))->first();
 		$teams = $project->teams;
 		$creator = $project->creator;
 		$latestTeam = $teams->sortBy('created_at')->last();
