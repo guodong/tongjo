@@ -16,7 +16,7 @@ class ProjectListController extends BaseController {
 				$projectCreator = $projects[$i]->creator;
 				$projectList[$i] = array( 'projectID' => $projects[$i]->id,
 									  	  'projectName' => $projects[$i]->name,
-									      'projectImage' => $projects[$i]->pic,
+									      'projectImage' => $projects[$i]->image,
 									  	  'projectCreatDate' => date($projects[$i]->created_at),
 									      'projectEndDate' => $projects[$i]->deadline,
 									      'projectFounderId' => $projects[$i]->user_id,
@@ -49,7 +49,7 @@ class ProjectListController extends BaseController {
 				$projectCreator = $projects[$i]->creator;
 				$projectList[$i] = array( 'projectID' => $projects[$i]->id,
 									  	  'projectName' => $projects[$i]->name,
-									      'projectImage' => $projects[$i]->pic,
+									      'projectImage' => $projects[$i]->image,
 									  	  'projectCreatDate' => date($projects[$i]->created_at),
 									      'projectEndDate' => $projects[$i]->deadline,
 										  'projectFounderId' => $projects[$i]->creator->id,
