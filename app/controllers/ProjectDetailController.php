@@ -12,14 +12,19 @@ class ProjectDetailController extends BaseController {
 		$creator = $project->creator;
 		$latestTeam = $teams->sortBy('created_at')->last();
 		$projectFounderUniversity = School::find($creator->school_id);
-		$latestTeamFounder = User::find($latestTeam->user_id);
-		$latestTeamFounderSchool = School::find($latestTeamFounder->school_id);
+		if ($latestTeam)
+		{
+			$latestTeamFounder = User::find($latestTeam->user_id);
+			$latestTeamFounderSchool = School::find($latestTeamFounder->school_id);
+		}
 		if($project){
-			$response = array('result' => array('code' =>0, 'message' => 'no problem'), 'projectDetail' => array(
+			if ($latestTeam) 
+			{
+				$response = array('result' => array('code' =>0, 'message' => 'no problem'), 'projectDetail' => array(
 							  'info' => array(
 							  		'projectID' => $project->id, 
 							  		'projectName' => $project->name, 
-							  		'projectImage' => $project->pic, 
+							  		'projectImage' => $project->image, 
 							  		'projectCreatedDate' => date($project->created_at), 
 							  		'projectEndDate' => $project->deadline, 
 							  		'projectFounderId' => $project->user_id, 
@@ -31,7 +36,7 @@ class ProjectDetailController extends BaseController {
 							  		'projectText' => $project->description), 
 							  'comment' => array('commentCount'=> 0),
 							  'team' => array(
-							  		'teamCount' => count($teams), 
+							  		'teamCount' => count($teams),
 							  		'latestTeamFounderId' => $latestTeam->user_id, 
 							  		'latestTeamName'=> $latestTeam->name, 
 							  		'latestTeamFounderName' => $latestTeamFounder->realname, 
@@ -39,9 +44,31 @@ class ProjectDetailController extends BaseController {
 							  		'latestTeamFounderSchool' => $latestTeamFounderSchool->name, 
 							  		'latestTeamDate' => date($latestTeam->created_at), 
 							  		'latestTeamMemberAll' => $latestTeam->teammember_all, 
-							  		'latestTeamMemberNow' => $latestTeam->teammember_current))
+							  		'latestTeamMemberNow' => $latestTeam->teammember_current))										
 							  );
-			return Responses::json($response);
+				return Responses::json($response);
+			}
+			else
+			{
+				$response = array('result' => array('code' =>0, 'message' => 'no problem'), 'projectDetail' => array(
+						'info' => array(
+								'projectID' => $project->id,
+								'projectName' => $project->name,
+								'projectImage' => $project->image,
+								'projectCreatedDate' => date($project->created_at),
+								'projectEndDate' => $project->deadline,
+								'projectFounderId' => $project->user_id,
+								'projectFounderName' => $creator->realname,
+								'projectFounderImage' => $creator->avatar,
+								'projectFounderUniversityId' => $projectFounderUniversity->id,
+								'projectFounderUniversityName' => $projectFounderUniversity->name,
+								'projectLable' => $project->type,
+								'projectText' => $project->description),
+						'comment' => array('commentCount'=> 0),
+						'team' => array('teamCount' => count($teams)))
+								);
+						return Responses::json($response);
+			}
 		}else{
 			return Responses::json(array('result' => array('code' =>1, 'message' => 'problem 1')));
 		}
