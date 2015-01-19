@@ -1,7 +1,7 @@
 <?php
 class Project extends Eloquent {
 	protected $table = 'project';
-	protected $fillable = array('name', 'user_id', 'type', 'description', 'sponsor', 'deadline', 'parttype', 'is_open');
+	protected $fillable = array('name', 'user_id', 'type', 'image', 'description', 'sponsor', 'deadline', 'parttype', 'is_open');
 
 	public function teams()
 	{
