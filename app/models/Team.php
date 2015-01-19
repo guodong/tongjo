@@ -13,6 +13,11 @@ class Team extends Eloquent {
 	{
 	    return $this->belongsToMany('User', 'user_team')->withTimestamps()->withPivot('status');
 	}
+	
+	public function creator()
+	{
+	    return $this->belongsTo('user', 'user_id');
+	}
 
 	
 }
