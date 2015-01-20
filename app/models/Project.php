@@ -23,4 +23,9 @@ class Project extends Eloquent {
 	{
 	    return $this->belongsToMany('User', 'user_project')->withTimestamps();
 	}
+	
+	public function comments()
+	{
+	    return $this->hasMany('Comment');
+	}
 }
