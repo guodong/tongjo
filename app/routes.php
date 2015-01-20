@@ -26,6 +26,7 @@ Route::resource('user.type.team', 'UserTypeTeamController');
 Route::resource('team.user', 'TeamUserController');
 Route::resource('category', 'CategoryController');
 Route::resource('team', 'TeamController');
+Route::resource('teamlist', 'TeamListController');
 Route::resource('school', 'SchoolController');
 Route::resource('major', 'MajorController');
 Route::resource('team.user.status', 'TeamUserStatusController');

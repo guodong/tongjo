@@ -46,7 +46,7 @@ class ProjectDetailController extends BaseController {
 							  		'teamFounderId' => $latestTeam->user_id, 
 							  		'teamName'=> $latestTeam->name, 
 							  		'teamFounderName' => $latestTeamFounder->realname, 
-							  		'teamFounderIamge' => $latestTeamFounder->avatar, 
+							  		'teamFounderImage' => $latestTeamFounder->avatar, 
 							  		'teamFounderSchool' => $latestTeamFounderSchool->name, 
 							  		'teamCreatedDate' => date($latestTeam->created_at), 
 							  		'teamMemberAll' => $latestTeam->teammember_all, 
