@@ -26,7 +26,8 @@ class ProjectListController extends BaseController {
 									      'projectFounderUniversityName' => School::find($projects[$i]->creator->school_id)->name,
 									      'projectLabel' => $projects[$i]->categorys->first()->name,
 					                      'projectText' => $projects[$i]->description,
-									      'teamNumber' => count($projects[$i]->teams)
+									      'teamNumber' => count($projects[$i]->teams),
+										  'commentNumber' => 0
 									    );
 			}
 			if($projectList){
@@ -60,7 +61,8 @@ class ProjectListController extends BaseController {
 									      'projectFounderUniversityName' => School::find($projects[$i]->creator->school_id)->name,
 									      'projectLabel' => $projects[$i]->categorys->first()->name,
 					                      'projectText' => $projects[$i]->description,
-						                  'teamNumber' => count($projects[$i]->teams)
+						                  'teamNumber' => count($projects[$i]->teams),
+										  'commentNumber' => 0
 									    );
 			}
 			if($projectList){

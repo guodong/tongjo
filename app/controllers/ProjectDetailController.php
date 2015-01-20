@@ -20,7 +20,7 @@ class ProjectDetailController extends BaseController {
 		if($project){
 			if ($latestTeam) 
 			{
-				$response = array('result' => array('code' =>0, 'message' => 'no problem'), 'projectDetail' => array(
+				$response = array('result' => array('code' =>0, 'message' => 'no problem'), 
 							  'info' => array(
 							  		'projectID' => $project->id, 
 							  		'projectName' => $project->name, 
@@ -33,39 +33,51 @@ class ProjectDetailController extends BaseController {
 							  		'projectFounderUniversityId' => $projectFounderUniversity->id,
 							  		'projectFounderUniversityName' => $projectFounderUniversity->name,
 							  		'projectLable' => $project->type, 
-							  		'projectText' => $project->description), 
-							  'comment' => array('commentCount'=> 0),
+							  		'projectText' => $project->description, 
+									'teamNumber' => count($teams),
+									'commentNumber' => 0),
+							  'comment' => array(
+							  		'commentUserId'=> 0,
+							  		'commentUserName' => 0,
+							  		'commentUserImage' => 0,
+							  		'commentText' => 0,
+							  		'commentDate' => 0),			  		
 							  'team' => array(
-							  		'teamCount' => count($teams),
-							  		'latestTeamFounderId' => $latestTeam->user_id, 
-							  		'latestTeamName'=> $latestTeam->name, 
-							  		'latestTeamFounderName' => $latestTeamFounder->realname, 
-							  		'latestTeamFounderIamge' => $latestTeamFounder->avatar, 
-							  		'latestTeamFounderSchool' => $latestTeamFounderSchool->name, 
-							  		'latestTeamDate' => date($latestTeam->created_at), 
-							  		'latestTeamMemberAll' => $latestTeam->teammember_all, 
-							  		'latestTeamMemberNow' => $latestTeam->teammember_current))										
+							  		'teamFounderId' => $latestTeam->user_id, 
+							  		'teamName'=> $latestTeam->name, 
+							  		'teamFounderName' => $latestTeamFounder->realname, 
+							  		'teamFounderIamge' => $latestTeamFounder->avatar, 
+							  		'teamFounderSchool' => $latestTeamFounderSchool->name, 
+							  		'teamCreatedDate' => date($latestTeam->created_at), 
+							  		'teamMemberAll' => $latestTeam->teammember_all, 
+							  		'teamMemberNow' => $latestTeam->teammember_current)										
 							  );
 				return Responses::json($response);
 			}
 			else
 			{
-				$response = array('result' => array('code' =>0, 'message' => 'no problem'), 'projectDetail' => array(
-						'info' => array(
-								'projectID' => $project->id,
-								'projectName' => $project->name,
-								'projectImage' => $project->image,
-								'projectCreatedDate' => date($project->created_at),
-								'projectEndDate' => $project->deadline,
-								'projectFounderId' => $project->user_id,
-								'projectFounderName' => $creator->realname,
-								'projectFounderImage' => $creator->avatar,
-								'projectFounderUniversityId' => $projectFounderUniversity->id,
-								'projectFounderUniversityName' => $projectFounderUniversity->name,
-								'projectLable' => $project->type,
-								'projectText' => $project->description),
-						'comment' => array('commentCount'=> 0),
-						'team' => array('teamCount' => count($teams)))
+				$response = array('result' => array('code' =>0, 'message' => 'no problem'),
+							'info' => array(
+									'projectID' => $project->id,
+									'projectName' => $project->name,
+									'projectImage' => $project->image,
+									'projectCreatedDate' => date($project->created_at),
+									'projectEndDate' => $project->deadline,
+									'projectFounderId' => $project->user_id,
+									'projectFounderName' => $creator->realname,
+									'projectFounderImage' => $creator->avatar,
+									'projectFounderUniversityId' => $projectFounderUniversity->id,
+									'projectFounderUniversityName' => $projectFounderUniversity->name,
+									'projectLable' => $project->type,
+									'projectText' => $project->description,
+									'teamNumber' => 0,
+									'commentNumber' => 0),
+							'comment' => array(
+							  		'commentUserId'=> 0,
+							  		'commentUserName' => 0,
+							  		'commentUserImage' => 0,
+							  		'commentText' => 0,
+							  		'commentDate' => 0),		
 								);
 						return Responses::json($response);
 			}
