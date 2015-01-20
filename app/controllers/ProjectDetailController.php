@@ -9,8 +9,10 @@ class ProjectDetailController extends BaseController {
 		//$project = Project::find($id);
 		$project = Project::whereRaw('id = ?', array(Input::get('projectId')))->first();
 		$teams = $project->teams;
+		$comments = $project->comments;
 		$creator = $project->creator;
 		$latestTeam = $teams->sortBy('created_at')->last();
+		$latestComment = $comments->sortBy('created_at')->last();
 		$projectFounderUniversity = School::find($creator->school_id);
 		if ($latestTeam)
 		{
@@ -37,11 +39,11 @@ class ProjectDetailController extends BaseController {
 									'teamNumber' => count($teams),
 									'commentNumber' => 0),
 							  'comment' => array(
-							  		'commentUserId'=> 0,
-							  		'commentUserName' => 0,
-							  		'commentUserImage' => 0,
-							  		'commentText' => 0,
-							  		'commentDate' => 0),			  		
+							  		'commentUserId'=> $latestComment->user_id,
+							  		'commentUserName' => User::find($latestComment->user_id)->realname,
+							  		'commentUserImage' => User::find($latestComment->user_id)->avatar,
+							  		'commentText' => $latestComment->content,
+							  		'commentDate' => date($latestComment->created_at)),			  		
 							  'team' => array(
 							  		'teamFounderId' => $latestTeam->user_id, 
 							  		'teamName'=> $latestTeam->name, 

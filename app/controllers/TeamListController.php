@@ -6,25 +6,22 @@ class TeamListController extends BaseController {
 
 	public function index()
 	{
-		$project = Category::whereRaw('id = ?', array(Input::get('projectId')))->first();
+		$project = Project::whereRaw('id = ?', array(Input::get('projectId')))->first();
 		if ($project)
 		{
 			$teams = $project->teams;
-			if ($teams)
-			{
-				return Responses::json($teams);
-			}
 			$count = count($teams);
 			if ($count != 0)
 			{	
 				for ($i = 0 ; $i <= $count-1; $i++)
 				{
+					$teamFounder = User::find($teams[$i]->user_id);
 					$teamList[$i] = array( 
 						'teamFounderId' => $teams[$i]->user_id,
 						'teamName'=> $teams[$i]->name,
-						'teamFounderName' => User::find($teams[$i]->user_id)->realname,
-						'teamFounderIamge' => User::find($teams[$i]->user_id)->avatar,
-						'teamFounderSchool' => School::find(User::find($teams[$i]->user_id))->school_id,
+						'teamFounderName' => $teamFounder->realname,
+						'teamFounderIamge' => $teamFounder->avatar,
+						'teamFounderSchool' => School::find($teamFounder->school_id)->name,
 						'teamCreatedDate' => date($teams[$i]->created_at),
 						'teamMemberAll' => $teams[$i]->teammember_all,
 						'teamMemberNow' => $teams[$i]->teammember_current);
