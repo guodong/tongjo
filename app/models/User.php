@@ -29,4 +29,9 @@ class User extends Eloquent {
 	{
 	    return $this->belongsTo('School');
 	}
+	
+	public function tags()
+	{
+	    return $this->belongsToMany('Tag', 'user_tag');
+	}
 }
