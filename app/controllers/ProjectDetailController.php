@@ -19,10 +19,13 @@ class ProjectDetailController extends BaseController {
 			$latestTeamFounder = User::find($latestTeam->user_id);
 			$latestTeamFounderSchool = School::find($latestTeamFounder->school_id);
 		}
-		if($project){
+		if($project)
+		{
 			if ($latestTeam) 
 			{
-				$response = array('result' => array('code' =>0, 'message' => 'no problem'), 
+				if ($latestComment)
+				{	
+					$response = array('result' => array('code' =>0, 'message' => 'no problem'), 
 							  'info' => array(
 							  		'projectID' => $project->id, 
 							  		'projectName' => $project->name, 
@@ -34,16 +37,16 @@ class ProjectDetailController extends BaseController {
 							  		'projectFounderImage' => $creator->avatar, 
 							  		'projectFounderUniversityId' => $projectFounderUniversity->id,
 							  		'projectFounderUniversityName' => $projectFounderUniversity->name,
-							  		'projectLable' => $project->type, 
+							  		'projectLabel' => $project->categorys->first()->name,
 							  		'projectText' => $project->description, 
 									'teamNumber' => count($teams),
-									'commentNumber' => 0),
+									'commentNumber' => count($comments)),
 							  'comment' => array(
 							  		'commentUserId'=> $latestComment->user_id,
 							  		'commentUserName' => User::find($latestComment->user_id)->realname,
 							  		'commentUserImage' => User::find($latestComment->user_id)->avatar,
 							  		'commentText' => $latestComment->content,
-							  		'commentDate' => date($latestComment->created_at)),			  		
+							  		'commentDate' => date($latestComment->created_at)),	  		
 							  'team' => array(
 							  		'teamFounderId' => $latestTeam->user_id, 
 							  		'teamName'=> $latestTeam->name, 
@@ -54,11 +57,11 @@ class ProjectDetailController extends BaseController {
 							  		'teamMemberAll' => $latestTeam->teammember_all, 
 							  		'teamMemberNow' => $latestTeam->teammember_current)										
 							  );
-				return Responses::json($response);
-			}
-			else
-			{
-				$response = array('result' => array('code' =>0, 'message' => 'no problem'),
+					return Responses::json($response);
+				}
+				else 
+				{
+					$response = array('result' => array('code' =>0, 'message' => 'no problem'),
 							'info' => array(
 									'projectID' => $project->id,
 									'projectName' => $project->name,
@@ -70,18 +73,73 @@ class ProjectDetailController extends BaseController {
 									'projectFounderImage' => $creator->avatar,
 									'projectFounderUniversityId' => $projectFounderUniversity->id,
 									'projectFounderUniversityName' => $projectFounderUniversity->name,
-									'projectLable' => $project->type,
+									'projectLabel' => $project->categorys->first()->name,
+									'projectText' => $project->description,
+									'teamNumber' => count($teams),
+									'commentNumber' => 0),
+							'team' => array(
+									'teamFounderId' => $latestTeam->user_id,
+									'teamName'=> $latestTeam->name,
+									'teamFounderName' => $latestTeamFounder->realname,
+									'teamFounderImage' => $latestTeamFounder->avatar,
+									'teamFounderSchool' => $latestTeamFounderSchool->name,
+									'teamCreatedDate' => date($latestTeam->created_at),
+									'teamMemberAll' => $latestTeam->teammember_all,
+									'teamMemberNow' => $latestTeam->teammember_current)
+					);
+					return Responses::json($response);
+				}
+			}
+			else
+			{
+				if ($latestComment)
+				{
+					$response = array('result' => array('code' =>0, 'message' => 'no problem'),
+							'info' => array(
+									'projectID' => $project->id,
+									'projectName' => $project->name,
+									'projectImage' => $project->image,
+									'projectCreatedDate' => date($project->created_at),
+									'projectEndDate' => $project->deadline,
+									'projectFounderId' => $project->user_id,
+									'projectFounderName' => $creator->realname,
+									'projectFounderImage' => $creator->avatar,
+									'projectFounderUniversityId' => $projectFounderUniversity->id,
+									'projectFounderUniversityName' => $projectFounderUniversity->name,
+									'projectLabel' => $project->categorys->first()->name,
+									'projectText' => $project->description,
+									'teamNumber' => 0,
+									'commentNumber' => count($comments)),
+							'comment' => array(
+							  		'commentUserId'=> $latestComment->user_id,
+							  		'commentUserName' => User::find($latestComment->user_id)->realname,
+							  		'commentUserImage' => User::find($latestComment->user_id)->avatar,
+							  		'commentText' => $latestComment->content,
+							  		'commentDate' => date($latestComment->created_at)),		
+								);
+						return Responses::json($response);
+				}
+				else 
+				{
+					$response = array('result' => array('code' =>0, 'message' => 'no problem'),
+							'info' => array(
+									'projectID' => $project->id,
+									'projectName' => $project->name,
+									'projectImage' => $project->image,
+									'projectCreatedDate' => date($project->created_at),
+									'projectEndDate' => $project->deadline,
+									'projectFounderId' => $project->user_id,
+									'projectFounderName' => $creator->realname,
+									'projectFounderImage' => $creator->avatar,
+									'projectFounderUniversityId' => $projectFounderUniversity->id,
+									'projectFounderUniversityName' => $projectFounderUniversity->name,
+									'projectLabel' => $project->categorys->first()->name,
 									'projectText' => $project->description,
 									'teamNumber' => 0,
 									'commentNumber' => 0),
-							'comment' => array(
-							  		'commentUserId'=> 0,
-							  		'commentUserName' => 0,
-							  		'commentUserImage' => 0,
-							  		'commentText' => 0,
-							  		'commentDate' => 0),		
-								);
-						return Responses::json($response);
+					);
+					return Responses::json($response);
+				}
 			}
 		}else{
 			return Responses::json(array('result' => array('code' =>1, 'message' => 'problem 1')));
