@@ -36,4 +36,5 @@ Route::resource('projectlist', 'ProjectListController');
 Route::resource('login', 'LoginController');
 Route::resource('project.team', 'ProjectTeamController'); //获取参加某项目的团队
 Route::resource('tag', 'TagController');
+Route::resource('comment', 'CommentController');
 
