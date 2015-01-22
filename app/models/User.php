@@ -20,6 +20,12 @@ class User extends Eloquent {
 	    return $this->hasMany('Project');
 	}
 	
+	// 参加的项目，只包含个人参加
+	public function joinedProjects()
+	{
+	    return $this->belongsToMany('Project', 'user_project');
+	}
+	
 	public function major()
 	{
 	    return $this->belongsTo('Major');

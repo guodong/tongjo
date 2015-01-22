@@ -20,6 +20,7 @@ class TeamController extends BaseController
             $v->major;
         }
         $m->project;
+        $m->members_count = $m->members->count();
         return $m->toJson();
     }
 
