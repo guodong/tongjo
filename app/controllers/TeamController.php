@@ -36,7 +36,7 @@ class TeamController extends BaseController
     {
         $project = Team::find($id);
 	    $project->update(Input::get());
-        $project->save();
+        return $project;
     }
     
     

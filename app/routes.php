@@ -40,4 +40,7 @@ Route::resource('tag', 'TagController');
 Route::resource('user.tag.pivot', 'UserTagPivotController');
 Route::resource('comment', 'CommentController');
 Route::resource('project.user.pivot', 'ProjectUserPivotController'); //设置参加团队的状态
+Route::resource('from.message', 'FromMessageController');
+Route::resource('to.message', 'ToMessageController');
+Route::resource('user.message', 'UserMessageController'); //同时包含from和to
 

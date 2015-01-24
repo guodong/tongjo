@@ -6,6 +6,9 @@ class ProjectTeamController extends BaseController {
 	public function index($project_id)
 	{
 		$project = Project::find($project_id);
+		$project->teams->each(function($t){
+		    $t->members_count = $t->members->count();
+		});
 		return $project->teams;
 	}
 	
