@@ -17,7 +17,8 @@ class UserController extends BaseController {
 	    if($user){
 	        $user->school;
 	        $user->major;
-	        return $user->toJson();
+	        $user->tags;
+	        return $user;
 	    }else{
 	        return json_encode(array('error'=>1, 'msg'=>'no user'));
 	    }
