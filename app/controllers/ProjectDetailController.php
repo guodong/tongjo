@@ -48,6 +48,7 @@ class ProjectDetailController extends BaseController {
 							  		'commentText' => $latestComment->content,
 							  		'commentDate' => date($latestComment->created_at)),	  		
 							  'team' => array(
+							  		'teamId' => $latestTeam->id,
 							  		'teamFounderId' => $latestTeam->user_id, 
 							  		'teamName'=> $latestTeam->name, 
 							  		'teamFounderName' => $latestTeamFounder->realname, 
@@ -78,6 +79,7 @@ class ProjectDetailController extends BaseController {
 									'teamNumber' => count($teams),
 									'commentNumber' => 0),
 							'team' => array(
+									'teamId' => $latestTeam->id,
 									'teamFounderId' => $latestTeam->user_id,
 									'teamName'=> $latestTeam->name,
 									'teamFounderName' => $latestTeamFounder->realname,

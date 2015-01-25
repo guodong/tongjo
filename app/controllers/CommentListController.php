@@ -44,4 +44,13 @@ class CommentListController extends BaseController {
 		}
 	}
 	
+	public function store()
+	{
+		$comment = Comment::create(Input::get());
+		return Responses::json(array(
+					'result' => array(
+						'code' =>0, 'message' => 'no problem'),
+					));
+	}
+	
 }

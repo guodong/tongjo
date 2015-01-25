@@ -16,15 +16,16 @@ class TeamListController extends BaseController {
 				for ($i = 0 ; $i <= $count-1; $i++)
 				{
 					$teamFounder = User::find($teams[$i]->user_id);
-					$teamList[$i] = array( 
+					$teamList[$i] = array(
+						'teamId' => $teams[$i]->id,
 						'teamFounderId' => $teams[$i]->user_id,
 						'teamName'=> $teams[$i]->name,
 						'teamFounderName' => $teamFounder->realname,
-						'teamFounderIamge' => $teamFounder->avatar,
+						'teamFounderImage' => $teamFounder->avatar,
 						'teamFounderSchool' => School::find($teamFounder->school_id)->name,
 						'teamCreatedDate' => date($teams[$i]->created_at),
 						'teamMemberAll' => $teams[$i]->teammember_all,
-						'teamMemberNow' => $teams[$i]->teammember_current);
+						'teamMemberNow' => count($teams[$i]->members));
 				}
 			
 				$response = array( 
