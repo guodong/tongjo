@@ -43,4 +43,5 @@ Route::resource('project.user.pivot', 'ProjectUserPivotController'); //设置参
 Route::resource('from.message', 'FromMessageController');
 Route::resource('to.message', 'ToMessageController');
 Route::resource('user.message', 'UserMessageController'); //同时包含from和to
+Route::resource('reply', 'ReplyController');
 
