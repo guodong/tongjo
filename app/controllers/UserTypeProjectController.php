@@ -10,10 +10,17 @@ class UserTypeProjectController extends BaseController {
 	        $projects = $user->createdProjects;
 	        return $projects->toJson();
 	    }else if($type == 'joined'){
+	        // 团队参加
 	        $teams = $user->joinedTeams;
 	        $projects = array();
 	        foreach ($teams as $v){
+	            $v->project->type = 'team';
 	            $projects[] = $v->project;
+	        }
+	        // 个人参加
+	        foreach ($user->joinedProjects as $v){
+	            $v->type = 'solo';
+	            $projects[] = $v;
 	        }
 		  return json_encode($projects);
 	    }

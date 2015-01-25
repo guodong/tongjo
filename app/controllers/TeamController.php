@@ -20,6 +20,7 @@ class TeamController extends BaseController
             $v->major;
         }
         $m->project;
+        $m->members_count = $m->members->count();
         return $m->toJson();
     }
 
@@ -35,7 +36,7 @@ class TeamController extends BaseController
     {
         $project = Team::find($id);
 	    $project->update(Input::get());
-        $project->save();
+        return $project;
     }
     
     
