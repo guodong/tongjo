@@ -43,5 +43,18 @@ class CommentListController extends BaseController {
 			return Responses::json(array('result' => array('code' =>1, 'message' => 'problem 1')));
 		}
 	}
-		
+	
+	public function store()
+	{
+		$tmp = Input::get();
+		$record = new Comment();
+		$record->user_id = $tmp->userId;
+		$record->project_id = $tmp->projectId;
+		$record->content = $tmp->commentText;
+		if (isset($record->user_id) && isset($record->project_id) && isset($record->content))
+			return Responses::json(array(
+					'result' => array(
+							'code' =>0, 'message' => 'no problem')));
+
+	}	
 }

@@ -87,7 +87,7 @@ class ProjectDetailController extends BaseController {
 									'teamFounderSchool' => $latestTeamFounderSchool->name,
 									'teamCreatedDate' => date($latestTeam->created_at),
 									'teamMemberAll' => $latestTeam->teammember_all,
-									'teamMemberNow' => count($latestTeam->members)
+									'teamMemberNow' => count($latestTeam->members))
 					);
 					return Responses::json($response);
 				}

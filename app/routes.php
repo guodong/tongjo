@@ -35,12 +35,12 @@ Route::resource('user.avatar', 'UserAvatarController');
 Route::resource('projectdetail', 'ProjectDetailController');
 Route::resource('projectlist', 'ProjectListController');
 Route::resource('login', 'LoginController');
-Route::resource('userdetail', 'UserDetailController');
-Route::resource('project.team', 'ProjectTeamController'); //获取参加某项目的团队
+Route::resource('homepage', 'HomePageController');
+Route::resource('project.team', 'ProjectTeamController'); //鑾峰彇鍙傚姞鏌愰」鐩殑鍥㈤槦
 Route::resource('tag', 'TagController');
 Route::resource('user.tag.pivot', 'UserTagPivotController');
 Route::resource('comment', 'CommentController');
-Route::resource('project.user.pivot', 'ProjectUserPivotController'); //设置参加团队的状态
+Route::resource('project.user.pivot', 'ProjectUserPivotController'); //璁剧疆鍙傚姞鍥㈤槦鐨勭姸鎬�
 Route::resource('from.message', 'FromMessageController');
 Route::resource('to.message', 'ToMessageController');
 Route::resource('user.message', 'UserMessageController'); //同时包含from和to
