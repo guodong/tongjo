@@ -7,23 +7,7 @@ class UserDetailController extends BaseController {
 	public function index()
 	{
 		$user = User::whereRaw('id = ?', array(Input::get('userId')))->first();
-		$createdteams = $user->createdTeams;
 		$joinedteams = $user->joinedTeams;
-		if (count($joinedteams))
-		{
-			$num = count($joinedteams);
-			for ($i = 0; $i < $num; $i++)
-			{	
-				if ($joinedteams[$i]->user_id == $user->id)
-				unset($joinedteams[$i]);					
-			}
-			if (count($joinedteams) > 1)
-				sort($joinedteams);
-			return $joinedteams;
-		}
-		
-		$createdprojects = $user->createdProjects;
-		$joinedprojects = NULL;
 		if (count($joinedteams) != 0)
 		{
 			for ($i =0; $i < count($joinedteams); $i++)
@@ -36,8 +20,8 @@ class UserDetailController extends BaseController {
 			sort($joinedprojects);
 		}
 		
-		$teamcount = count($createdteams) + count($joinedteams);
-		$projectcount = count($createdprojects) + count($joinedprojects);
+		$teamcount =  count($joinedteams);
+		$projectcount = count($joinedprojects);
 		
 		if ($user)
 		{
@@ -52,34 +36,9 @@ class UserDetailController extends BaseController {
 		}
 		if ($projectcount != 0)
 		{
-			if (count($createdprojects) != 0)
+			for ($j = 0; $j <= $projectcount - 1; $j++)
 			{
-				for ($i = 0; $i <= count($createdprojects)-1; $i++)
-				{
-					$createdProjectList[$i] = array(
-						'projectId' => $createdprojects[$i]->id,
-						'projectName' => $createdprojects[$i]->name,
-						'projectImage' => $createdprojects[$i]->image,
-						'projectCreatedDate' => date($createdprojects[$i]->created_at),
-						'projectEndDate' => $createdprojects[$i]->deadline,
-						'projectFounderId' => $user->id,
-						'projectFounderName' => $user->realname,
-						'projectFounderImage' => $user->avatar,
-						'projectFounderUniversityId' => $user->school_id,
-						'projectFounderUniversityName' => School::find($user->school_id)->name,
-						'projectLabel' => $createdprojects[$i]->categorys->first()->name,
-						'projectText' => $createdprojects[$i]->description,
-						'teamNumber' => count($createdprojects[$i]->teams),
-						'commentNumber' => count($createdprojects[$i]->comments)
-					);
-				}
-				$userProjectList = $createdProjectList;
-			}
-			if (count($joinedprojects) != 0)
-			{
-				for ($j = 0; $j <= count($joinedprojects)-1; $j++)
-				{
-					$joinedProjectList[$j] = array(
+				$joinedProjectList[$j] = array(
 						'projectId' => $joinedprojects[$j]->id,
 						'projectName' => $joinedprojects[$j]->name,
 						'projectImage' => $joinedprojects[$j]->image,
@@ -96,35 +55,15 @@ class UserDetailController extends BaseController {
 					    'commentNumber' => count($joinedprojects[$j]->comments)
 						);
 				}
-			
-					$userProjectList = array_merge($userProjectList , $joinedProjectList);			
-			}	
+				$userProjectList = $joinedProjectList;	
 		}
+		
+		return $userProjectList;
 		if ($teamcount != 0)
 		{
-			if (count($createdteams) != 0)
+			for ($l = 0; $l <= count($joinedteams) - 1; $l++)
 			{
-				for ($k = 0; $k <= count($createdteams) - 1; $k++)
-				{
-					$createdTeamList[$k] = array(
-						'teamId' => $createdteams[$k]->id,
-						'teamFounderId' => $user->id,
-						'teamName' => $createdteams[$k]->name,
-						'teamFounderName' => $user->realname,
-						'teamFounderImage' => $user->avatar,
-						'teamFounderSchool' => School::find($user->school_id)->name,
-						'teamCreatedDate' => date($createdteams[$k]->created_at),
-						'teamMemberAll' => count($createdprojects[$k]->teams),
-						'teamMemberNow' => count($createdprojects[$k]->members)
-						);
-				 }
-				 $userTeamList = $createdTeamList;
-			}
-			if (count($joinedteams) != 0)
-			{
-				for ($l = 0; $l <= count($joinedteams) - 1; $l++)
-				{
-					$joinedTeamList[$l] = array(
+				$joinedTeamList[$l] = array(
 						'teamId' => $joinedteams[$l]->id,
 						'teamFounderId' => $joinedteams[$l]->user_id,
 						'teamName' => $joinedteams[$l]->name,
@@ -135,9 +74,8 @@ class UserDetailController extends BaseController {
 						'teamMemberAll' => count($joinedteams[$l]->teams),
 						'teamMemberNow' => count($joinedteams[$l]->members)
 						);
-				 }
-				 $userTeamList = array_merge($userTeamList , $joinedTeamList);
-			 }
+				}
+				$userTeamList = $joinedTeamList;
 					
 		}
 		if ($user)
