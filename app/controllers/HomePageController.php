@@ -66,6 +66,7 @@ class HomePageController extends BaseController {
 			{
 				$joinedTeamList[$l] = array(
 						'teamId' => $joinedteams[$l]->id,
+						'projectId' => $joinedteams[$l]->project_id,
 						'teamFounderId' => $joinedteams[$l]->user_id,
 						'teamName' => $joinedteams[$l]->name,
 						'teamFounderName' => User::find($joinedteams[$l]->user_id)->realname,
@@ -73,8 +74,9 @@ class HomePageController extends BaseController {
 						'teamFounderSchool' => School::find(User::find($joinedteams[$l]->user_id)->school_id)->name,
 						'teamCreatedDate' => date($joinedteams[$l]->created_at),
 						'teamMemberAll' => count($joinedteams[$l]->teams),
-						'teamMemberNow' => count($joinedteams[$l]->members)
-						);
+						'teamMemberNow' => count($joinedteams[$l]->members),
+						'teamDeadlineDate' => $joinedteams[$l]->signup_time,
+						'teamDescription' => $joinedteams[$l]->description);
 				}
 				$userTeamList = $joinedTeamList;	
 		}

@@ -47,6 +47,7 @@ class CommentListController extends BaseController {
 	public function store()
 	{
 		$tmp = Input::get();
+		echo $tmp;
 		$record = new Comment();
 		$record->user_id = $tmp->userId;
 		$record->project_id = $tmp->projectId;
@@ -55,6 +56,10 @@ class CommentListController extends BaseController {
 			return Responses::json(array(
 					'result' => array(
 							'code' =>0, 'message' => 'no problem')));
+		else 
+		{
+			return Responses::json(array('result' => array('code' =>1, 'message' => 'problem 1')));
+		}
 
 	}	
 }
