@@ -50,14 +50,13 @@ class CommentListController extends BaseController {
 		$record = new Comment();
 		foreach ($tmp as $k=>$v){
 			if ($k == 'userId')
-				$record->user_id = $v;
+				$record->user_id = (int)$v;
 		    if ($k == 'projectId')
-				$record->project_id = $v;
+				$record->project_id = (int)$v;
 			if ($k == 'commentText')
 				$record->content = $v;
 		}
 		$record->save();
-		return $record;
 		if (isset($record->user_id) && isset($record->project_id) && isset($record->content))
 			return Responses::json(array(
 					'result' => array(
