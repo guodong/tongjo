@@ -15,6 +15,7 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+Route::resource('apphome', 'AppHomeController');
 Route::resource('user', 'UserController');
 Route::resource('registration', 'RegistrationController');
 Route::resource('project', 'ProjectController');
