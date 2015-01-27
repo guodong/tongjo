@@ -16,6 +16,7 @@ Route::get('/', function()
 	return View::make('hello');
 });
 Route::resource('user', 'UserController');
+Route::resource('registration', 'RegistrationController');
 Route::resource('project', 'ProjectController');
 Route::resource('image', 'ImageController');
 //Route::resource('project.user', 'ProjectUserController');
