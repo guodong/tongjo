@@ -1,8 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Input;
-class UserTagPivotController extends BaseController {
+class UserTagController extends BaseController {
 	
-	public function show($id)
+	public function index($id)
 	{
 	    $user = User::find($id);
 	    return $user->tags;
