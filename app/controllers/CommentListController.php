@@ -46,7 +46,6 @@ class CommentListController extends BaseController {
 	
 	public function store()
 	{
-		
 		date_default_timezone_set('Asia/Shanghai');
 		$record = new Comment();
 		$record->user_id = (int)Input::get("userId");
@@ -68,7 +67,7 @@ class CommentListController extends BaseController {
 							'code' =>0, 'message' => 'no problem')));
 		else 
 		{
-			return Responses::json(array('result' => array('code' =>Input::get("userId"), 'message' => 'problem 1')));
+			return Responses::json(array('result' => array('code' =>1, 'message' => 'problem 1')));
 		}
 	}	
 }
