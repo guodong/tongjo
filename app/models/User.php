@@ -12,7 +12,7 @@ class User extends Eloquent {
 	
 	public function joinedTeams()
 	{
-	    return $this->belongsToMany('Team', 'user_team');
+	    return $this->belongsToMany('Team', 'user_team')->withPivot('status');
 	}
     
 	public function createdProjects()
