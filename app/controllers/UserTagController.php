@@ -6,12 +6,12 @@ class UserTagPivotController extends BaseController {
 	public function show($id)
 	{
 	    $user = User::find($id);
-	    return $user->toJson();
+	    return $user->tags->toJson();
 	}
 	
 	public function index()
 	{
-		$user = User::find($id);
+		$user = User::find();
 		return $user->toJson();
 	}
 }
