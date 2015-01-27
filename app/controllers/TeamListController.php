@@ -18,6 +18,7 @@ class TeamListController extends BaseController {
 					$teamFounder = User::find($teams[$i]->user_id);
 					$teamList[$i] = array(
 						'teamId' => $teams[$i]->id,
+						'projectId' => $project->id,
 						'teamFounderId' => $teams[$i]->user_id,
 						'teamName'=> $teams[$i]->name,
 						'teamFounderName' => $teamFounder->realname,
@@ -25,7 +26,9 @@ class TeamListController extends BaseController {
 						'teamFounderSchool' => School::find($teamFounder->school_id)->name,
 						'teamCreatedDate' => date($teams[$i]->created_at),
 						'teamMemberAll' => $teams[$i]->teammember_all,
-						'teamMemberNow' => count($teams[$i]->members));
+						'teamMemberNow' => count($teams[$i]->members),
+						'teamDeadlineDate' => date($teams[$i]->signup_time),
+						'teamDescription' => $teams[$i]->description);
 				}
 			
 				$response = array( 

@@ -16,6 +16,7 @@ Route::get('/', function()
 	return View::make('hello');
 });
 Route::resource('user', 'UserController');
+Route::resource('registration', 'RegistrationController');
 Route::resource('project', 'ProjectController');
 Route::resource('image', 'ImageController');
 //Route::resource('project.user', 'ProjectUserController');
@@ -27,6 +28,7 @@ Route::resource('team.user', 'TeamUserController');
 Route::resource('category', 'CategoryController');
 Route::resource('team', 'TeamController');
 Route::resource('teamlist', 'TeamListController');
+Route::resource('teamdetail', 'TeamDetailController');
 Route::resource('commentlist', 'CommentListController');
 Route::resource('school', 'SchoolController');
 Route::resource('major', 'MajorController');

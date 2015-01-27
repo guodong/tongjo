@@ -49,6 +49,7 @@ class ProjectDetailController extends BaseController {
 							  		'commentDate' => date($latestComment->created_at)),	  		
 							  'team' => array(
 							  		'teamId' => $latestTeam->id,
+							  		'projectId' => $project->id, 
 							  		'teamFounderId' => $latestTeam->user_id, 
 							  		'teamName'=> $latestTeam->name, 
 							  		'teamFounderName' => $latestTeamFounder->realname, 
@@ -56,7 +57,9 @@ class ProjectDetailController extends BaseController {
 							  		'teamFounderSchool' => $latestTeamFounderSchool->name, 
 							  		'teamCreatedDate' => date($latestTeam->created_at), 
 							  		'teamMemberAll' => $latestTeam->teammember_all, 
-							  		'teamMemberNow' => count($latestTeam->members))										
+							  		'teamMemberNow' => count($latestTeam->members),
+							  		'teamDeadlineDate' => date($latestTeam->signup_time),
+							  		'teamDescription' => $latestTeam->description)										
 							  );
 					return Responses::json($response);
 				}
@@ -80,6 +83,7 @@ class ProjectDetailController extends BaseController {
 									'commentNumber' => 0),
 							'team' => array(
 									'teamId' => $latestTeam->id,
+									'projectId' => $project->id,
 									'teamFounderId' => $latestTeam->user_id,
 									'teamName'=> $latestTeam->name,
 									'teamFounderName' => $latestTeamFounder->realname,
@@ -87,7 +91,9 @@ class ProjectDetailController extends BaseController {
 									'teamFounderSchool' => $latestTeamFounderSchool->name,
 									'teamCreatedDate' => date($latestTeam->created_at),
 									'teamMemberAll' => $latestTeam->teammember_all,
-									'teamMemberNow' => count($latestTeam->members))
+									'teamMemberNow' => count($latestTeam->members),
+									'teamDeadlineDate' => date($latestTeam->signup_time),
+							  		'teamDescription' => $latestTeam->description)
 					);
 					return Responses::json($response);
 				}

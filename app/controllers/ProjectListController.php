@@ -11,6 +11,7 @@ class ProjectListController extends BaseController {
 		{
 			$projects = $category->projects;
 			$count = count($projects);
+			$projectList = NULL;
 			for ($i = 0 ; $i <= $count-1; $i++)
 			{
 				$projectCreator = $projects[$i]->creator;
