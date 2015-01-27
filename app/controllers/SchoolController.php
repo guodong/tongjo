@@ -5,7 +5,11 @@ class SchoolController extends BaseController {
 
 	public function index()
 	{
-	    return School::all()->toJson();
+	    $schools = School::all();
+	    foreach ($schools as $v){
+	        $v->campuses;
+	    }
+	    return $schools->toJson();
 	}
 	
 	public function show($id)

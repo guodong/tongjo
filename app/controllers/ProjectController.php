@@ -6,13 +6,25 @@ class ProjectController extends BaseController {
 	public function index()
 	{
 		$projects = Project::all();
-		return $projects->toJson();
+		foreach ($projects as $p){
+		    $p->teams;
+		    $p->teams_count = $p->teams->count();
+		    $p->users;
+		    $p->users_count = $p->users->count();
+		};
+		return $projects;
 	}
 	
 	public function show($id)
 	{
 	    $project = Project::find($id);
 	    $project->categorys;
+	    $project->creator;
+	    $project->comments;
+	    foreach ($project->comments as $v){
+	        $v->user;
+	    }
+	    
 	    return $project->toJson();
 	}
 	
@@ -22,7 +34,6 @@ class ProjectController extends BaseController {
 	    foreach (Input::get('categorys') as $v){
 	        $project->categorys()->attach($v);
 	    }
-	    //$project->categorys()-sync(Input::get('categorys'));
 	    return $project->toJson();
 	}
 	
