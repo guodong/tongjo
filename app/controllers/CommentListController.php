@@ -52,7 +52,7 @@ class CommentListController extends BaseController {
 		$record->user_id = (int)Input::get("userId");
 		$record->project_id = (int)Input::get("projectId");
 		$record->content = Input::get("commentText");
-		return Input::get();
+		//return Input::get();
 		/*foreach ($tmp as $k=>$v){
 			if ($k == 'userId')
 				$record->user_id = (int)$v;
@@ -68,7 +68,7 @@ class CommentListController extends BaseController {
 							'code' =>0, 'message' => 'no problem')));
 		else 
 		{
-			return Responses::json(array('result' => array('code' =>1, 'message' => 'problem 1')));
+			return Responses::json(array('result' => array('code' =>Input::get("userId"), 'message' => 'problem 1')));
 		}
 	}	
 }
