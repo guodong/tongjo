@@ -41,7 +41,6 @@ Route::resource('login', 'LoginController');
 Route::resource('homepage', 'HomePageController');
 Route::resource('project.team', 'ProjectTeamController'); //鑾峰彇鍙傚姞鏌愰」鐩殑鍥㈤槦
 Route::resource('tag', 'TagController');
-Route::resource('user.tag', 'UserTagController');
 Route::resource('user.tag.pivot', 'UserTagPivotController');
 Route::resource('comment', 'CommentController');
 Route::resource('project.user.pivot', 'ProjectUserPivotController'); //璁剧疆鍙傚姞鍥㈤槦鐨勭姸鎬�
