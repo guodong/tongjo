@@ -67,7 +67,7 @@ class CommentListController extends BaseController {
 							'code' =>0, 'message' => 'no problem')));
 		else 
 		{
-			return Responses::json(array('result' => array('code' =>1, 'message' => 'problem 1')));
+			return Responses::json(array('result' => array('code' => 1, 'message' => 'problem 1')));
 		}
 	}	
 }
