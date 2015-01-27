@@ -46,11 +46,12 @@ class CommentListController extends BaseController {
 	
 	public function store()
 	{
-		//$tmp = Input::get();
+		date_default_timezone_set('Asia/Shanghai');
 		$record = new Comment();
 		$record->user_id = (int)Input::get("userId");
 		$record->project_id = (int)Input::get("projectId");
 		$record->content = Input::get("commentText");
+		//return Input::get();
 		/*foreach ($tmp as $k=>$v){
 			if ($k == 'userId')
 				$record->user_id = (int)$v;

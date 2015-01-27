@@ -41,6 +41,7 @@ Route::resource('login', 'LoginController');
 Route::resource('homepage', 'HomePageController');
 Route::resource('project.team', 'ProjectTeamController');
 Route::resource('tag', 'TagController');
+Route::resource('user.tag', 'UserTagController');
 Route::resource('user.tag.pivot', 'UserTagPivotController');
 Route::resource('comment', 'CommentController');
 Route::resource('project.user.pivot', 'ProjectUserPivotController');
