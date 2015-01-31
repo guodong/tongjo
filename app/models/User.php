@@ -40,4 +40,9 @@ class User extends Eloquent {
 	{
 	    return $this->belongsToMany('Tag', 'user_tag');
 	}
+	
+	public function experiences()
+	{
+	    return $this->hasMany('Experience');
+	}
 }
