@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Response;
 class UserExperienceController extends BaseController {
 
 	public function index($user_id)
@@ -21,10 +22,17 @@ class UserExperienceController extends BaseController {
 	    return $exp;
 	}
 
-	public function update ($id)
+	public function update ($user_id, $exp_id)
 	{
-	    $data = Experience::find($id);
+	    $data = Experience::find($exp_id);
 	    $data->update(Input::get());
 	    return $data;
+	}
+	
+	public function destroy($user_id, $exp_id)
+	{
+	    $exp = Experience::find($exp_id);
+	    $exp->delete();
+	    return json_encode(array('result'=>0, 'msg'=>'success'));
 	}
 }
