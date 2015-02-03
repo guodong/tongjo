@@ -7,16 +7,18 @@ class ProjectHomeController extends BaseController {
 	public function index()
 	{
 		$user = User::whereRaw('id = ?', array(Input::get('userId')))->first();
-		$categoryId =  Input::get('categoryId');
-		$customId = Input::get("customId");
+		$categoryId =  (int) Input::get('categoryId');
+		$customId = (int) Input::get("customId");
 		
 		if (Input::get('userId') != 0)
 		{
+			$projects = Project::Paginate(20)->take(6);
+			$adProjects = [];
+			$projectList = NULL;
+			
 			if ($categoryId == 0)
 			{
-				$projects = Project::Paginate(20)->take(6);
-				$adProjects = [];
-				$projectList = NULL;
+				
 				
 				if ($customId == 1)
 				{
