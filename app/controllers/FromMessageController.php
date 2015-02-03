@@ -6,6 +6,7 @@ class FromMessageController extends BaseController
 
     public function index ($from_id)
     {
+        $this->auth($from_id);
         $data = Message::where('from_id', '=', $from_id)->get();
         $data->each(function($d){
             $d->from;

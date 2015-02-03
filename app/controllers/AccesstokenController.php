@@ -12,6 +12,7 @@ class AccesstokenController extends BaseController {
 		    $token = md5($user->id.time());
 		    Cache::put($user->id, $user, 10);
 		    $user->accesstoken = $token;
+		    $_SESSION['uid'] = $user->id;
 		    return $user->toJson();
 		}else{
 		    return json_encode(array('error'=>1));

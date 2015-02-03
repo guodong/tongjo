@@ -45,6 +45,7 @@ class ProjectController extends BaseController {
 	public function update($id)
 	{
 	    $project = Project::find($id);
+	    $this->auth($project->creator_id);
 	    $project->update(Input::get());
 	    return $project->toJson();
 	}

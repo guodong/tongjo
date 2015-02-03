@@ -35,6 +35,7 @@ class UserController extends BaseController {
 	// PUT /user/$id
 	public function update($id)
 	{
+	    $this->auth($id);
 	    $user = User::find($id);
 	    foreach (Input::get() as $k=>$v){
 	        if (is_string($v) || is_numeric($v)){

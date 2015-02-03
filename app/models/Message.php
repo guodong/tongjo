@@ -1,7 +1,7 @@
 <?php
 class Message extends Eloquent {
 	protected $table = 'message';
-	protected $fillable = array('from_id', 'to_id', 'content');
+	protected $fillable = array('from_id', 'to_id', 'title','content');
 
 	public function from()
 	{
