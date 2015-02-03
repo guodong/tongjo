@@ -35,6 +35,7 @@ class TeamController extends BaseController
     public function update ($id)
     {
         $data = Team::find($id);
+        $this->auth($data->user_id);
 	    $data->update(Input::get());
 	    $data->members;
         return $data;
