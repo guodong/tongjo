@@ -129,7 +129,7 @@ class ProjectHomeController extends BaseController {
 				}
 			}
 			
-			else if ($categoryId != 0 && $categoryId != NULL)
+			else if ($categoryId != 0 && $categoryId != NULL && $customId == 0)
 			{
 				$projects = $category->projects;
 				$count = count($projects);
@@ -151,6 +151,10 @@ class ProjectHomeController extends BaseController {
 							'teamNumber' => count($projects[$i]->teams),
 							'commentNumber' => count($projects[$i]->comments));
 				}
+			}
+			
+			else if ($categoryId != 0 && $categoryId != NULL && $customId != 0) {
+				return Responses::json(array('result' => array('code' =>2, 'message' => 'Parameters error!')));
 			}
 			
 			else {
