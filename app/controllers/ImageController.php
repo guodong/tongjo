@@ -5,7 +5,7 @@ class ImageController extends BaseController {
 	
 	public function store()
 	{
-	    /* $post_input = 'php://input';
+	    $post_input = 'php://input';
 	    $save_path = PATH_BASE.'public/files/';
 	    $postdata = file_get_contents( $post_input );
 	    
@@ -24,7 +24,7 @@ class ImageController extends BaseController {
 	    }else {
 	        die ( 'Image data not detected!' );
 	    }
-	    return; */
+	    return;
 	    $fn = time().'.jpg';
 	    $dst = PATH_BASE.'public/files/'.$fn;
 	    $img = str_replace('data:image/png;base64,', '', Input::get('image'));
