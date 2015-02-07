@@ -1,7 +1,4 @@
 <?php
-
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Cache;
 class AccesstokenController extends BaseController {
 
 	public function index()
@@ -12,7 +9,7 @@ class AccesstokenController extends BaseController {
 		    $token = md5($user->id.time());
 		    Cache::put($user->id, $user, 10);
 		    $user->accesstoken = $token;
-		    $_SESSION['uid'] = $user->id;
+		    Session::put('uid', $user->id);
 		    return $user->toJson();
 		}else{
 		    return json_encode(array('error'=>1));

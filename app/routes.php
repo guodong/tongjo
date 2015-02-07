@@ -54,5 +54,5 @@ Route::resource('user.message', 'UserMessageController'); //同时包含from和t
 Route::resource('reply', 'ReplyController');
 Route::resource('team.user.pivot', 'TeamUserPivotController');
 Route::resource('user.experience', 'UserExperienceController');
-Route::get('session', 'SessionController');
+Route::resource('session', 'SessionController');
 

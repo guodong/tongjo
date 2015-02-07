@@ -4,12 +4,12 @@ class BaseController extends Controller {
     //验证用户是否登陆，未登录则exit；若登陆用户和目标用户不一致，为攻击
     protected function auth($id = NULL)
     {
-        if (empty($_SESSION['uid'])){
+        if (!Session::has('uid')){
             echo json_encode(array('error'=>1, 'msg'=>'need login'));
             exit();
         }
         if (null !== $id){
-            if ($id != $_SESSION['uid']){
+            if ($id != Session::get('uid')){
                 echo json_encode(array('error'=>2, 'msg'=>'attacker!!!'));
                 exit();
             }

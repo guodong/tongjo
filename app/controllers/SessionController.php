@@ -5,12 +5,15 @@ class SessionController extends BaseController {
 
 	public function index()
 	{
-        if (empty($_SESSION['uid'])){
+        if (!Session::has('uid')){
             return Response::json(array('error'=>1, 'msg'=>'session timeout'));
         }else{
-            return User::find($_SESSION['uid']);
+            return User::find(Session::get('uid'));
         }
 	}
 	
-
+    public function destroy()
+    {
+        Session::forget('uid');
+    }
 }
