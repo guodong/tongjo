@@ -22,6 +22,7 @@ class ProjectController extends BaseController {
 	    $project->creator;
 	    $project->comments;
 	    $project->teams;
+	    $project->tags;
 	    $project->teams->each(function($t){
 	        $t->members_count = $t->members->count();
 	    });

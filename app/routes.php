@@ -55,4 +55,6 @@ Route::resource('reply', 'ReplyController');
 Route::resource('team.user.pivot', 'TeamUserPivotController');
 Route::resource('user.experience', 'UserExperienceController');
 Route::resource('session', 'SessionController');
+Route::resource('project.tag', 'ProjectTagController');
+Route::resource('project.tag.pivot', 'ProjectTagPivotController');
 

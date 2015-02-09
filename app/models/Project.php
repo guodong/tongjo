@@ -28,4 +28,9 @@ class Project extends Eloquent {
 	{
 	    return $this->hasMany('Comment');
 	}
+	
+	public function tags()
+	{
+		return $this->belongsToMany('Tag', 'project_tag');
+	}
 }
