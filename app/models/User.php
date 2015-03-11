@@ -23,7 +23,7 @@ class User extends Eloquent {
 	// 参加的项目，只包含个人参加
 	public function joinedProjects()
 	{
-	    return $this->belongsToMany('Project', 'user_project');
+	    return $this->belongsToMany('Project', 'user_project')->withPivot('status');
 	}
 	
 	public function major()

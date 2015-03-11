@@ -15,11 +15,13 @@ class UserTypeProjectController extends BaseController {
 	        $projects = array();
 	        foreach ($teams as $v){
 	            $v->project->type = 'team';
+	            $v->project->joinstatus = $v->pivot->status;
 	            $projects[] = $v->project;
 	        }
 	        // 个人参加
 	        foreach ($user->joinedProjects as $v){
 	            $v->type = 'solo';
+	            $v->joinstatus = $v->pivot->status;
 	            $projects[] = $v;
 	        }
 		  return json_encode($projects);

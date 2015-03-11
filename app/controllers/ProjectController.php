@@ -5,7 +5,16 @@ class ProjectController extends BaseController {
 
 	public function index()
 	{
-		$projects = Project::all();
+	    switch (Input::get('orderby')){
+	        case 'hot':
+	            $projects = Project::orderBy('viewcount desc')->get();
+	        case 'new':
+	            $projects = Project::orderBy('created_at desc')->get();
+	            break;
+	        default:
+	            $projects = Project::all();
+	    }
+		
 		foreach ($projects as $p){
 		    $p->teams;
 		    $p->teams_count = $p->teams->count();
@@ -30,7 +39,8 @@ class ProjectController extends BaseController {
 	    foreach ($project->comments as $v){
 	        $v->user;
 	    }
-	    
+	    $project->viewcount++;
+	    $project->save();
 	    return $project->toJson();
 	}
 	
