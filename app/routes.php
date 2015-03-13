@@ -57,5 +57,6 @@ Route::resource('user.experience', 'UserExperienceController');
 Route::resource('session', 'SessionController');
 Route::resource('project.tag', 'ProjectTagController');
 Route::resource('project.tag.pivot', 'ProjectTagPivotController');
-Route::get('/email/send', 'EmailController@send');
+Route::get('/emailverify', 'EmailController@verify');
+Route::get('/emailsend', 'EmailController@send');
 

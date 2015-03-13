@@ -28,7 +28,12 @@ class UserController extends BaseController {
 	public function store()
 	{
 	    $_POST['password'] = md5($_POST['password']);
+	    $_POST['email_verify_code'] = uniqid();
 	    $user = User::create($_POST);
+	    Mail::send('emails.auth.register', array('id' => $user->id, 'code'=>$user->email_verify_code), function($message)
+	    {
+	        $message->to($user->email, '您好')->subject('欢迎加入同舟!');
+	    });
 	    return $user->toJson();
 	}
 	
