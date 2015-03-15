@@ -15,6 +15,8 @@ class TeamController extends BaseController
         $m = Team::find($id);
         $m->members;
         $m->creator;
+        $m->creator->school;
+        $m->creator->major;
         foreach ($m->members as $v){
             $v->school;
             $v->major;

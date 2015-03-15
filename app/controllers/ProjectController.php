@@ -29,6 +29,8 @@ class ProjectController extends BaseController {
 	    $project = Project::find($id);
 	    $project->categorys;
 	    $project->creator;
+	    $project->creator->school;
+	    $project->creator->major;
 	    $project->comments;
 	    $project->teams;
 	    $project->tags;

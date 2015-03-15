@@ -23,6 +23,7 @@ class EmailController extends BaseController {
 	    $user = User::find(Input::get('id'));
 	    if(!$user->email_verify_code){
 	        $user->email_verify_code = uniqid();
+	        $user->save();
 	    }
 	    Mail::send('emails.auth.register', array('id' => $user->id, 'code'=>$user->email_verify_code), function($message) use ($user)
 	    {
