@@ -21,7 +21,10 @@ class EmailController extends BaseController {
 	public function send()
 	{
 	    $user = User::find(Input::get('id'));
-	    Mail::send('emails.auth.register', array('id' => $user->id, 'code'=>$user->email_verify_code), function($message)
+	    if(!$user->email_verify_code){
+	        $user->email_verify_code = uniqid();
+	    }
+	    Mail::send('emails.auth.register', array('id' => $user->id, 'code'=>$user->email_verify_code), function($message) use ($user)
 	    {
 	        $message->to($user->email, '您好')->subject('欢迎加入同舟!');
 	    });

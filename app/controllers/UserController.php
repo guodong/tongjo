@@ -30,7 +30,7 @@ class UserController extends BaseController {
 	    $_POST['password'] = md5($_POST['password']);
 	    $_POST['email_verify_code'] = uniqid();
 	    $user = User::create($_POST);
-	    Mail::send('emails.auth.register', array('id' => $user->id, 'code'=>$user->email_verify_code), function($message)
+	    Mail::send('emails.auth.register', array('id' => $user->id, 'code'=>$user->email_verify_code), function($message) use ($user)
 	    {
 	        $message->to($user->email, '您好')->subject('欢迎加入同舟!');
 	    });
@@ -51,5 +51,16 @@ class UserController extends BaseController {
 	    //echo $user->realname;
 	    $user->save();
 	    return $user->toJson();
+	}
+	
+	public function resetpassword()
+	{
+	    $user = User::find(Input::get('uid'));
+	    if ($user->password != md5(Input::get('oldpsw'))){
+	        return 1;
+	    }
+	    $user->password = md5(Input::get('newpsw'));
+	    $user->save();
+	    return 0;
 	}
 }
