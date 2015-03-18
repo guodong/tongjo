@@ -3,7 +3,7 @@ class User extends Eloquent {
 	protected $table = 'user';
 
 	protected $hidden = array('password', 'email_verify_code');
-	protected $fillable = array('email', 'password', 'realname', 'gender', 'email_verify_code', 'school_id', 'academy_id', 'major_id');
+	protected $fillable = array('email', 'password', 'realname', 'avatar', 'gender', 'email_verify_code', 'school_id', 'academy_id', 'major_id');
 	
 	public function createdTeams()
 	{
