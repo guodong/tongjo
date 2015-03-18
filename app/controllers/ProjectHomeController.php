@@ -13,7 +13,7 @@ class ProjectHomeController extends BaseController {
 		
 		if (Input::get('userId') != 0)
 		{
-			$projects = Project::Paginate(20)->take(6);
+			$projects = Project::Paginate(10);
 			$adProjects = [];
 			$projectList = NULL;
 			
@@ -40,7 +40,7 @@ class ProjectHomeController extends BaseController {
 								'teamNumber' => count($projects[$i]->teams),
 								'commentNumber' => 0);
 					}
-					for ($i = 0 ; $i <= 5; $i++)
+					for ($i = 0 ; $i <= 9; $i++)
 					{
 						$projectCreator = $projects[$i]->creator;
 						$projectList[$i] = array( 'projectID' => $projects[$i]->id,
@@ -62,7 +62,7 @@ class ProjectHomeController extends BaseController {
 				}
 				else if ($customId == 2)
 				{
-					for ($i = 0 ; $i <= 5; $i++)
+					for ($i = 0 ; $i <= 9; $i++)
 					{
 						$projectCreator = $projects[$i]->creator;
 						$projectList[$i] = array( 'projectID' => $projects[$i]->id,
@@ -83,7 +83,7 @@ class ProjectHomeController extends BaseController {
 				}
 				else if ($customId == 3)
 				{
-					for ($i = 0 ; $i <= 5; $i++)
+					for ($i = 0 ; $i <= 9; $i++)
 					{
 						$projectCreator = $projects[$i]->creator;
 						$projectList[$i] = array( 'projectID' => $projects[$i]->id,
@@ -104,7 +104,7 @@ class ProjectHomeController extends BaseController {
 				}
 				else if ($customId == 4)
 				{
-					for ($i = 0 ; $i <= 5; $i++)
+					for ($i = 0 ; $i <= 9; $i++)
 					{
 						$projectCreator = $projects[$i]->creator;
 						$projectList[$i] = array( 'projectID' => $projects[$i]->id,

@@ -8,6 +8,9 @@ class RegistrationController extends BaseController {
 	{
 		$_POST['password'] = md5($_POST['password']);
 	    $user = User::create($_POST);
+	    if ($user == NULL)
+	    	return Responses::json(array('result' => array('code' =>1, 'message' => 'problem 1')));
+	    
 		if (isset($user->email) && isset($user->password))
 			return Responses::json(array(
 					'result' => array(
