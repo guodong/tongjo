@@ -4,18 +4,18 @@ use Illuminate\Support\Facades\Input;
 
 class RegistrationController extends BaseController {
 	
-	public function store()
+	public function index()
 	{
-		$_POST['password'] = md5($_POST['password']);
+		//$_POST['password'] = md5($_POST['password']);
 		//$user = User::find($_POST);
 		//if (json_decode($user) != NULL)
 			//return Responses::json(array('result' => array('code' =>2, 'message' => 'problem 2')));
 		//else
 		//{
-	    	$user = User::create($_POST);
-			if (isset($user->email) && isset($user->password))
-			{
-				$user->hxid = "hx_".(string)$user->id;
+	    	//$user = User::create($_POST);
+			//if (isset($user->email) && isset($user->password))
+			//{
+				//$user->hxid = "hx_".(string)$user->id;
 				$url = "https://a1.easemob.com/easemob-demo/chatdemoui/token";
 				$get_token = array();
 				$get_token['grant_type'] = "client_credentials";
@@ -31,17 +31,17 @@ class RegistrationController extends BaseController {
 				return $output;
 				
 				
-				if (isset($user->hxid))
-				return Responses::json(array(
-							'result' => array(
-							'code' =>0, 'message' => 'no problem'),
-							'userId' => $user->id
-							));
-			}
-			else 
-			{
-				return Responses::json(array('result' => array('code' =>1, 'message' => 'problem 1')));
-			}
+				//if (isset($user->hxid))
+				//return Responses::json(array(
+							//'result' => array(
+							//'code' =>0, 'message' => 'no problem'),
+							//'userId' => $user->id
+							//));
+			//}
+			//else 
+			//{
+				//return Responses::json(array('result' => array('code' =>1, 'message' => 'problem 1')));
+			//}
 		//}
 	}	
 }
