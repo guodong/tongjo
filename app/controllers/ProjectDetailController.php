@@ -38,7 +38,7 @@ class ProjectDetailController extends BaseController {
 							  		'projectFounderUniversityId' => $projectFounderUniversity->id,
 							  		'projectFounderUniversityName' => $projectFounderUniversity->name,
 							  		'projectLabel' => $project->categorys->first()->name,
-							  		'projectText' => $project->description, 
+							  		'projectText' => strip_tags($project->description), 
 									'teamNumber' => count($teams),
 									'commentNumber' => count($comments)),
 							  'comment' => array(
@@ -78,7 +78,7 @@ class ProjectDetailController extends BaseController {
 									'projectFounderUniversityId' => $projectFounderUniversity->id,
 									'projectFounderUniversityName' => $projectFounderUniversity->name,
 									'projectLabel' => $project->categorys->first()->name,
-									'projectText' => $project->description,
+									'projectText' => strip_tags($project->description),
 									'teamNumber' => count($teams),
 									'commentNumber' => 0),
 							'team' => array(
@@ -115,7 +115,7 @@ class ProjectDetailController extends BaseController {
 									'projectFounderUniversityId' => $projectFounderUniversity->id,
 									'projectFounderUniversityName' => $projectFounderUniversity->name,
 									'projectLabel' => $project->categorys->first()->name,
-									'projectText' => $project->description,
+									'projectText' => strip_tags($project->description),
 									'teamNumber' => 0,
 									'commentNumber' => count($comments)),
 							'comment' => array(
@@ -142,7 +142,7 @@ class ProjectDetailController extends BaseController {
 									'projectFounderUniversityId' => $projectFounderUniversity->id,
 									'projectFounderUniversityName' => $projectFounderUniversity->name,
 									'projectLabel' => $project->categorys->first()->name,
-									'projectText' => $project->description,
+									'projectText' => strip_tags($project->description),
 									'teamNumber' => 0,
 									'commentNumber' => 0),
 					);
