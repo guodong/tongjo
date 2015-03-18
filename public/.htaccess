@@ -2,7 +2,10 @@
     <IfModule mod_negotiation.c>
         Options -MultiViews
     </IfModule>
-
+#Header add Access-Control-Allow-Origin: http://web.tongjo.me
+    Header add Access-Control-Allow-Methods: "GET,PUT,DELETE,POST,OPTIONS"
+    Header add Access-Control-Allow-Headers: Content-Type
+    Header add Access-Control-Allow-Credentials: true
     RewriteEngine On
 
     # Redirect Trailing Slashes...
@@ -12,7 +15,5 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
-    #Header add Access-Control-Allow-Origin: "*"
-    Header add Access-Control-Allow-Methods: "GET,PUT,DELETE,POST,OPTIONS"
-    Header add Access-Control-Allow-Headers: Content-Type
+    
 </IfModule>

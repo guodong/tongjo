@@ -5,9 +5,11 @@ class SchoolController extends BaseController {
 
 	public function index()
 	{
-	    $schools = School::all();
+	    $schools = School::where('fid','=','0')->get();
 	    foreach ($schools as $v){
-	        $v->campuses;
+	        $v->academies->each(function($academy){
+	            $academy->majors;
+	        });
 	    }
 	    return $schools->toJson();
 	}

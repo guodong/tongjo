@@ -29,7 +29,10 @@ class UserController extends BaseController {
 	{
 	    $_POST['password'] = md5($_POST['password']);
 	    $_POST['email_verify_code'] = uniqid();
+	    $_POST['realname'] = '同志'.rand(1, 9999);
+	    $_POST['avatar'] = 'sysavatar/'.rand(1, 40).'.jpg';
 	    $user = User::create($_POST);
+	    
 	    Mail::send('emails.auth.register', array('id' => $user->id, 'code'=>$user->email_verify_code), function($message) use ($user)
 	    {
 	        $message->to($user->email, '您好')->subject('欢迎加入同舟!');
@@ -85,6 +88,7 @@ class UserController extends BaseController {
 	        {
 	            $message->to($user->email, '您好')->subject('同舟密码重置');
 	        });
+	        return 1;
 	    }
 	}
 }

@@ -2,8 +2,8 @@
 class User extends Eloquent {
 	protected $table = 'user';
 
-	protected $hidden = array('password');
-	protected $fillable = array('email', 'password', 'realname', 'gender', 'email_verify_code');
+	protected $hidden = array('password', 'email_verify_code');
+	protected $fillable = array('email', 'password', 'realname', 'gender', 'email_verify_code', 'school_id', 'academy_id', 'major_id');
 	
 	public function createdTeams()
 	{
@@ -34,6 +34,11 @@ class User extends Eloquent {
 	public function school()
 	{
 	    return $this->belongsTo('School');
+	}
+	
+	public function academy()
+	{
+	    return $this->belongsTo('Academy');
 	}
 	
 	public function tags()

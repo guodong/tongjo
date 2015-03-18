@@ -2,8 +2,9 @@
 class School extends Eloquent {
 	protected $table = 'school';
 	
-	public function campuses()
+	public function academies()
 	{
-	    return $this->hasMany('Campus');
+	    return $this->hasMany('Academy', 'fid');
 	}
+	
 }
