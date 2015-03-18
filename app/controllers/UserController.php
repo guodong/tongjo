@@ -55,6 +55,15 @@ class UserController extends BaseController {
 	
 	public function resetpassword()
 	{
+	    //找回密码
+	    if (Input::get('code')){
+	        $user = User::find(Input::get('uid'));
+	        $user->password = md5(Input::get('newpsw'));
+	        $user->save();
+	        return 0;
+	    }
+	    //修改密码
+	    $this->auth(Input::get('uid'));
 	    $user = User::find(Input::get('uid'));
 	    if ($user->password != md5(Input::get('oldpsw'))){
 	        return 1;
@@ -62,5 +71,20 @@ class UserController extends BaseController {
 	    $user->password = md5(Input::get('newpsw'));
 	    $user->save();
 	    return 0;
+	}
+	
+	public function findpassword()
+	{
+	    $user = User::where('email', '=', Input::get('email'))->first();
+	    if ($user){
+	        if (!$user->email_verify_code){
+	            $user->email_verify_code = uniqid();
+	            $user->save();
+	        }
+	        Mail::send('emails.auth.findpsw', array('id' => $user->id, 'code'=>$user->email_verify_code), function($message) use ($user)
+	        {
+	            $message->to($user->email, '您好')->subject('同舟密码重置');
+	        });
+	    }
 	}
 }
