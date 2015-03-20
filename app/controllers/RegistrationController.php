@@ -16,13 +16,14 @@ class RegistrationController extends BaseController {
 			//if (isset($user->email) && isset($user->password))
 			//{
 				//$user->hxid = "hx_".(string)$user->id;
-				$url = "https://a1.easemob.com/easemob-demo/chatdemoui/token";
+				$url = 'https://a1.easemob.com/easemob-demo/chatdemoui/token';
 				$get_token = array();
-				$get_token['grant_type'] = "client_credentials";
-				$get_token['client_id'] = "YXA6VP5zQMolEeS6LregkdHd4g";
+				$get_token['grant_type'] = 'client_credentials';
+				$get_token['client_id'] = 'YXA6VP5zQMolEeS6LregkdHd4g';
 				$get_token['client_secret'] = 'YXA6OuKmp8eotsVaUYdbcLRqYCIkbik';
 				$ch = curl_init();
 				curl_setopt($ch, CURLOPT_URL, $url);
+				curl_setopt($ch, CURLOPT_HEADER, 0);
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 				curl_setopt($ch, CURLOPT_POST, 1);
 				curl_setopt($ch, CURLOPT_POSTFIELDS, $get_token);
