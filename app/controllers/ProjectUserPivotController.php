@@ -26,9 +26,11 @@ class ProjectUserPivotController extends BaseController {
 	    $project = Project::find($project_id);
 	    foreach ($project->users as $v){
 	        if ($v->id == $user_id){
-	            foreach (Input::get() as $kk=>$vv){
-	                $v->pivot->{$kk} = $vv;
-	            }
+// 	            foreach (Input::get() as $kk=>$vv){
+// 	                $v->pivot->{$kk} = $vv;
+// 	            }
+                if (Input::get('status'))
+                    $v->pivot->status = Input::get('status');
 	            $v->pivot->save();
 	            break;
 	        }

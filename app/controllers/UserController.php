@@ -27,6 +27,11 @@ class UserController extends BaseController {
 	// POST /user
 	public function store()
 	{
+	    $u = User::where('email', '=', $_POST['email'])->first();
+	    if($u){
+	        echo 1;
+	        return;
+	    }
 	    $_POST['password'] = md5($_POST['password']);
 	    $_POST['email_verify_code'] = uniqid();
 	    $_POST['realname'] = '同志'.rand(1, 9999);

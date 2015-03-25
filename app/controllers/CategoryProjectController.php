@@ -6,7 +6,15 @@ class CategoryProjectController extends BaseController {
 	public function index($category_id)
 	{
 	    $category = Category::find($category_id);
-	    return $category->projects->toJson();
+	    $projects = [];
+	    if (count($category->children)){
+	        foreach ($category->children as $c){
+	            $projects = array_merge($projects, $this->index($c->id));
+	        }
+	    }else{
+	        $projects = $category->projects->toArray();
+	    }
+	    return $projects;
 	}
 	
 	public function show($id)

@@ -7,9 +7,9 @@ class ProjectController extends BaseController {
 	{
 	    switch (Input::get('orderby')){
 	        case 'hot':
-	            $projects = Project::orderBy('viewcount desc')->get();
+	            $projects = Project::orderBy('viewcount', 'desc')->get();
 	        case 'new':
-	            $projects = Project::orderBy('created_at desc')->get();
+	            $projects = Project::orderBy('created_at', 'desc')->get();
 	            break;
 	        default:
 	            $projects = Project::all();
@@ -60,6 +60,10 @@ class ProjectController extends BaseController {
 	    $project = Project::find($id);
 	    $this->auth($project->creator_id);
 	    $project->update(Input::get());
+	    $project->categorys()->detach();
+	    foreach (Input::get('categorys') as $v){
+	        $project->categorys()->attach($v);
+	    }
 	    return $project->toJson();
 	}
 
