@@ -24,7 +24,9 @@ class TeamUserController extends BaseController {
 	            return json_encode(array('error'=>1, 'msg'=>'already in team'));
 	        }
 	    }
-	    
+	    if($team->status != 0){
+	        return json_encode(array('error'=>2,'msg'=>'team is completed'));
+	    }
  	    $team->members()->attach($user_id);
  	    $team->members;
 	    return $team->toJson();
