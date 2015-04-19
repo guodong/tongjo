@@ -13,34 +13,15 @@ class ProjectHomeController extends BaseController {
 		
 		if (Input::get('userId') != 0)
 		{
-			$projects = Project::Paginate(10);
-			$adProjects = [];
-			$projectList = NULL;
-			
+			//$projects = Project::Paginate(10);
+			//$adProjects = [];
+			$projectList = NULL;			
 			if ($categoryId == 0)
 			{
 				if ($customId == 1)
 				{
-					for ($i = 0 ; $i <= 2; $i++)
-					{
-						$projectCreator = $projects[$i]->creator;
-						$adProjects[$i] = array( 
-								'projectID' => $projects[$i]->id,
-								'projectName' => $projects[$i]->name,
-								'projectImage' => $projects[$i]->image,
-								'projectCreatedDate' => date($projects[$i]->created_at),
-								'projectEndDate' => $projects[$i]->deadline,
-								'projectFounderId' => $projects[$i]->user_id,
-								'projectFounderName' => $projects[$i]->creator->realname,
-								'projectFounderImage' => $projects[$i]->creator->avatar,
-								'projectFounderUniversityId' => $projects[$i]->creator->school_id,
-								'projectFounderUniversityName' => School::find($projects[$i]->creator->school_id)->name,
-								'projectLabel' => $projects[$i]->categorys->first()->name,
-								'projectText' => $projects[$i]->description,
-								'teamNumber' => count($projects[$i]->teams),
-								'commentNumber' => 0);
-					}
-					for ($i = 0 ; $i <= 9; $i++)
+					$projects = Project::orderBy('viewcount', 'desc')->get();					
+					for ($i = 0 ; $i < 9; $i++)
 					{
 						$projectCreator = $projects[$i]->creator;
 						$projectList[$i] = array( 'projectID' => $projects[$i]->id,
@@ -56,12 +37,13 @@ class ProjectHomeController extends BaseController {
 								'projectLabel' => $projects[$i]->categorys->first()->name,
 								'projectText' => $projects[$i]->description,
 								'teamNumber' => count($projects[$i]->teams),
-								'commentNumber' => 0);
+								'commentNumber' => count($projects[$i]->comments));
 					}
 					
 				}
 				else if ($customId == 2)
 				{
+					$projects = Project::orderBy('created_at', 'desc')->get();
 					for ($i = 0 ; $i <= 9; $i++)
 					{
 						$projectCreator = $projects[$i]->creator;
@@ -78,11 +60,12 @@ class ProjectHomeController extends BaseController {
 								'projectLabel' => $projects[$i]->categorys->first()->name,
 								'projectText' => $projects[$i]->description,
 								'teamNumber' => count($projects[$i]->teams),
-								'commentNumber' => 0);
+								'commentNumber' => count($projects[$i]->comments));
 					}
 				}
 				else if ($customId == 3)
 				{
+					$projects = Project::all();
 					for ($i = 0 ; $i <= 9; $i++)
 					{
 						$projectCreator = $projects[$i]->creator;
@@ -99,11 +82,12 @@ class ProjectHomeController extends BaseController {
 								'projectLabel' => $projects[$i]->categorys->first()->name,
 								'projectText' => $projects[$i]->description,
 								'teamNumber' => count($projects[$i]->teams),
-								'commentNumber' => 0);
+								'commentNumber' => count($projects[$i]->comments));
 					}
 				}
 				else if ($customId == 4)
 				{
+					$projects = Project::all();
 					for ($i = 0 ; $i <= 9; $i++)
 					{
 						$projectCreator = $projects[$i]->creator;
@@ -120,7 +104,7 @@ class ProjectHomeController extends BaseController {
 								'projectLabel' => $projects[$i]->categorys->first()->name,
 								'projectText' => $projects[$i]->description,
 								'teamNumber' => count($projects[$i]->teams),
-								'commentNumber' => 0);
+								'commentNumber' => count($projects[$i]->comments));
 					}
 				}	
 				else 
