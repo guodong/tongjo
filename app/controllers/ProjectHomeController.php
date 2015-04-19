@@ -14,7 +14,7 @@ class ProjectHomeController extends BaseController {
 		if (Input::get('userId') != 0)
 		{
 			//$projects = Project::Paginate(10);
-			$adProjects = [];
+			//$adProjects = [];
 			$projectList = NULL;			
 			if ($categoryId == 0)
 			{
