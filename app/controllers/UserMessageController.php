@@ -16,6 +16,12 @@ class UserMessageController extends BaseController
             });
             
         });
+        if (Input::get('view')) {
+            $data->each(function ($d){
+                $d->is_viewed=1;
+                $d->save();
+            });
+        }
         return $data;
     }
 

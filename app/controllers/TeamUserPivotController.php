@@ -12,6 +12,9 @@ class TeamUserPivotController extends BaseController {
 	            return array('error'=>1, 'msg'=>'already exist');
 	        }
 	    };
+	    if ($team->status!=0){
+	        return array('error'=>2, 'msg'=>'team completed');
+	    }
 	    $team->members()->attach($user_id);
 	    return $team;
 	}

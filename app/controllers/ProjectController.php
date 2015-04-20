@@ -8,11 +8,12 @@ class ProjectController extends BaseController {
 	    switch (Input::get('orderby')){
 	        case 'hot':
 	            $projects = Project::orderBy('viewcount', 'desc')->get();
+	            break;
 	        case 'new':
 	            $projects = Project::orderBy('created_at', 'desc')->get();
 	            break;
 	        default:
-	            $projects = Project::all();
+	            $projects = Project::orderByRaw("RAND()")->get();
 	    }
 		
 		foreach ($projects as $p){
