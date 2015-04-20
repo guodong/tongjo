@@ -14,13 +14,13 @@ class ProjectHomeController extends BaseController {
 		if (Input::get('userId') != 0)
 		{
 			//$projects = Project::Paginate(10);
-			//$adProjects = [];
+			$adProjects = Project::orderByRaw("RAND()")->get();
 			$projectList = NULL;			
 			if ($categoryId == 0)
 			{
 				if ($customId == 1)
 				{
-					$projects = Project::orderBy('viewcount', 'desc')->get();					
+					$projects = Project::orderByRaw("RAND()")->get();
 					for ($i = 0 ; $i < 9; $i++)
 					{
 						$projectCreator = $projects[$i]->creator;
@@ -65,6 +65,7 @@ class ProjectHomeController extends BaseController {
 				}
 				else if ($customId == 3)
 				{
+					$projects = Project::orderBy('viewcount', 'desc')->get();
 					$projects = Project::all();
 					for ($i = 0 ; $i <= 9; $i++)
 					{
@@ -87,7 +88,7 @@ class ProjectHomeController extends BaseController {
 				}
 				else if ($customId == 4)
 				{
-					$projects = Project::all();
+					$projects = Project::orderByRaw("RAND()")->get();
 					for ($i = 0 ; $i <= 9; $i++)
 					{
 						$projectCreator = $projects[$i]->creator;
