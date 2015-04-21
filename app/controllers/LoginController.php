@@ -7,7 +7,7 @@ class LoginController extends BaseController {
 
 	public function index()
 	{
-		$user = User::whereRaw('email = ? and password = ?', array(Input::get('email'), md5(Input::get('password'))))->first();		
+		$user = User::whereRaw('email = ? and password = ?', array(Input::get('email'), Input::get('password')))->first();		
 		if($user){
 		    $token = md5($user->id.time());
 		    Cache::put($user->id, $user, 10);

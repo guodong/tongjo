@@ -12,4 +12,9 @@ class Category extends Eloquent {
 	{
 	    return $this->hasMany('Category', 'fid');
 	}
+	
+	public function father()
+	{
+		return $this->belongsto('Category', 'fid');
+	}
 }
