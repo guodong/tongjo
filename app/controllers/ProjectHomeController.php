@@ -137,18 +137,14 @@ class ProjectHomeController extends BaseController {
 			
 			else if ($categoryId != 0 && $categoryId != NULL && $customId == 0)
 			{
-				//$category = Category::find($categoryId);
-				//rerturn $category;
-	    		$projects = [];
+				$projects = [];
 	    		if (count($category->children)){
-	        		foreach ($category->children as $c){
-	            		$projects = array_merge($projects, $this->index($c->id));
-	        		}
-	    		}else{
+	        		for ($i = 0 ; $i <= count($category->children)-1; $i++)
+	        			$projects[$i] = Project::find($category->children[$i]->id);
+	        	}
+	    		else{
 	        		$projects = $category->projects->toArray();
 	    		}
-	    		
-	    		return $projects;
 				$count = count($projects);
 				for ($i = 0 ; $i <= $count-1; $i++)
 				{
