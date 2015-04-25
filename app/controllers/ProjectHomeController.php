@@ -173,12 +173,20 @@ class ProjectHomeController extends BaseController {
 				$projectList = NULL;
 			}
 			
-			if ($projectList){
+			if ($projectList && $categoryId == 0){
 				$response = array( 'result' => array('code' =>0, 'message' => 'no problem'), 
 								   'categoryId' => $categoryId,
 								   'customId' => $customId,
 							       'adProjects' => $adProjectList,
 							       'projectList' => $projectList);
+				return Responses::json($response);
+			}
+			else if ($projectList && $categoryId != 0 && $categoryId != NULL)
+			{
+				$response = array( 'result' => array('code' =>0, 'message' => 'no problem'),
+						'categoryId' => $categoryId,
+						'customId' => $customId,
+						'projectList' => $projectList);
 				return Responses::json($response);
 			}
 			else{

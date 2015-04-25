@@ -13,12 +13,17 @@ class LoginController extends BaseController {
 		    Cache::put($user->id, $user, 10);
 		    $user->accesstoken = $token;
 		    $response = array('result' => array(
-		    		'code' => 0, 
+		    		'code' => 0,
 		    		'message' => 'no problem'), 
-		    		'userId'=> $user->id, 
-		    		'email'=> $user->email, 
-		    		'realName'=> $user->realname, 
-		    		'gender'=> $user->gender);
+		    		'userInfo' => array(
+		    			'userId'=> $user->id, 
+		    			'userEmail'=> $user->email, 
+		    			'userRealName'=> $user->realname, 
+		    			'userGender'=> $user->gender,
+		    			'userUniversity'=> School::find($user->school_id)->name,
+		    			'userImage'=> $user->avatar
+		    			)
+		    		);
 			return Responses::json($response);
 		}else{
 		    return Responses::json(array('result' => array('code' =>1, 'message' => 'problem 1')));
