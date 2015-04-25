@@ -27,7 +27,7 @@ class ProjectDetailController extends BaseController {
 				{	
 					$response = array('result' => array('code' =>0, 'message' => 'no problem'), 
 							  'info' => array(
-							  		'projectID' => $project->id, 
+							  		'projectId' => $project->id, 
 							  		'projectName' => $project->name, 
 							  		'projectImage' => $project->image, 
 							  		'projectCreatedDate' => date($project->created_at), 
@@ -67,7 +67,7 @@ class ProjectDetailController extends BaseController {
 				{
 					$response = array('result' => array('code' =>0, 'message' => 'no problem'),
 							'info' => array(
-									'projectID' => $project->id,
+									'projectId' => $project->id,
 									'projectName' => $project->name,
 									'projectImage' => $project->image,
 									'projectCreatedDate' => date($project->created_at),
@@ -104,7 +104,7 @@ class ProjectDetailController extends BaseController {
 				{
 					$response = array('result' => array('code' =>0, 'message' => 'no problem'),
 							'info' => array(
-									'projectID' => $project->id,
+									'projectId' => $project->id,
 									'projectName' => $project->name,
 									'projectImage' => $project->image,
 									'projectCreatedDate' => date($project->created_at),
@@ -131,7 +131,7 @@ class ProjectDetailController extends BaseController {
 				{
 					$response = array('result' => array('code' =>0, 'message' => 'no problem'),
 							'info' => array(
-									'projectID' => $project->id,
+									'projectId' => $project->id,
 									'projectName' => $project->name,
 									'projectImage' => $project->image,
 									'projectCreatedDate' => date($project->created_at),

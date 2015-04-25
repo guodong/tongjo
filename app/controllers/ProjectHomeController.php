@@ -14,12 +14,13 @@ class ProjectHomeController extends BaseController {
 		if (Input::get('userId') != 0)
 		{
 			//$projects = Project::Paginate(10);
-			$adProjects = Project::all();
-			for ($i = 0 ; $i <= 9; $i++)
+			$adProjects = Project::orderByRaw("RAND()")->get();
+			//return Category::find($adProjects[4]->categorys->first()->fid)->name;
+			for ($i = 0 ; $i <= 2; $i++)
 			{
-				if ($adProjects[$i]->categorys!= NULL && $adProjects[$i]->categorys->first()->fid != 0 && $adProjects[$i]->id != 0)
+				if ($adProjects[$i]->categorys->first()->fid != 0 && $adProjects[$i]->id != 0)
 				{
-					$adProjectList[$i] = array( 'projectID' => $adProjects[$i]->id,
+					$adProjectList[$i] = array( 'projectId' => $adProjects[$i]->id,
 						'projectName' => $adProjects[$i]->name,
 						'projectImage' => $adProjects[$i]->image,
 						'projectCreatedDate' => date($adProjects[$i]->created_at),
@@ -34,6 +35,7 @@ class ProjectHomeController extends BaseController {
 						'teamNumber' => count($adProjects[$i]->teams),
 						'commentNumber' => count($adProjects[$i]->comments));
 				}
+				
 			}
 			
 			$projectList = NULL;			
@@ -46,7 +48,7 @@ class ProjectHomeController extends BaseController {
 					{
 						if ($projects[$i]->categorys!= NULL && $projects[$i]->categorys->first()->fid != 0 && $projects[$i]->id != 0)
 						{
-							$projectList[$i] = array( 'projectID' => $projects[$i]->id,
+							$projectList[$i] = array( 'projectId' => $projects[$i]->id,
 								'projectName' => $projects[$i]->name,
 								'projectImage' => $projects[$i]->image,
 								'projectCreatedDate' => date($projects[$i]->created_at),
@@ -69,7 +71,7 @@ class ProjectHomeController extends BaseController {
 					$projects = Project::orderBy('created_at', 'desc')->get();
 					for ($i = 0 ; $i <= 9; $i++)
 					{
-						$projectList[$i] = array( 'projectID' => $projects[$i]->id,
+						$projectList[$i] = array( 'projectId' => $projects[$i]->id,
 								'projectName' => $projects[$i]->name,
 								'projectImage' => $projects[$i]->image,
 								'projectCreatedDate' => date($projects[$i]->created_at),
@@ -90,7 +92,7 @@ class ProjectHomeController extends BaseController {
 					$projects = Project::orderBy('viewcount', 'desc')->get();
 					for ($i = 0 ; $i <= 9; $i++)
 					{
-						$projectList[$i] = array( 'projectID' => $projects[$i]->id,
+						$projectList[$i] = array( 'projectId' => $projects[$i]->id,
 								'projectName' => $projects[$i]->name,
 								'projectImage' => $projects[$i]->image,
 								'projectCreatedDate' => date($projects[$i]->created_at),
@@ -111,7 +113,7 @@ class ProjectHomeController extends BaseController {
 					$projects = Project::orderByRaw("RAND()")->get();
 					for ($i = 0 ; $i <= 9; $i++)
 					{
-						$projectList[$i] = array( 'projectID' => $projects[$i]->id,
+						$projectList[$i] = array( 'projectId' => $projects[$i]->id,
 								'projectName' => $projects[$i]->name,
 								'projectImage' => $projects[$i]->image,
 								'projectCreatedDate' => date($projects[$i]->created_at),
@@ -135,7 +137,8 @@ class ProjectHomeController extends BaseController {
 			
 			else if ($categoryId != 0 && $categoryId != NULL && $customId == 0)
 			{
-				$category = Category::find($categoryId);
+				//$category = Category::find($categoryId);
+				//rerturn $category;
 	    		$projects = [];
 	    		if (count($category->children)){
 	        		foreach ($category->children as $c){
@@ -144,10 +147,12 @@ class ProjectHomeController extends BaseController {
 	    		}else{
 	        		$projects = $category->projects->toArray();
 	    		}
+	    		
+	    		return $projects;
 				$count = count($projects);
 				for ($i = 0 ; $i <= $count-1; $i++)
 				{
-					$projectList[$i] = array( 'projectID' => $projects[$i]->id,
+					$projectList[$i] = array( 'projectId' => $projects[$i]->id,
 							'projectName' => $projects[$i]->name,
 							'projectImage' => $projects[$i]->image,
 							'projectCreatedDate' => date($projects[$i]->created_at),

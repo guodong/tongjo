@@ -20,7 +20,7 @@ class TeamDetailController extends BaseController {
 						'teamFounderSchool' => School::find($teamFounder->school_id)->name,
 						'teamCreatedDate' => date($team->created_at),
 						'teamMemberAll' => $team->teammember_all,
-						'teamMemberNow' => count($team->members),
+						'teamMemberNow' => (string)count($team->members),
 						'teamDeadlineDate' => date($team->signup_time),
 						'teamDescription' => $team->description);
 			
