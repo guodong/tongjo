@@ -30,5 +30,24 @@ class EmailController extends BaseController {
 	        $message->to($user->email, '您好')->subject('欢迎加入同舟!');
 	    });
 	}
+	
+	public function broadcast()
+	{
+	    $project = Project::find(Input::get('project_id'));
+	    foreach($project->users as $v){
+	        Mail::send('emails.broadcast', array('title' => Input::get('title'), 'content'=>Input::get('content')), function($message) use ($v)
+	        {
+	            $message->to($v->email, $v->realname)->subject(Input::get('title'));
+	        });
+	    }
+	    foreach ($project->teams as $team){
+	        foreach ($team->members as $v){
+	            Mail::send('emails.broadcast', array('title' => Input::get('title'), 'content'=>Input::get('content')), function($message) use ($v)
+	            {
+	                $message->to($v->email, $v->realname)->subject(Input::get('title'));
+	            });
+	        }
+	    }
+	}
 
 }

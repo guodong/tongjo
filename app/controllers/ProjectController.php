@@ -21,6 +21,7 @@ class ProjectController extends BaseController {
 		    $p->teams_count = $p->teams->count();
 		    $p->users;
 		    $p->users_count = $p->users->count();
+		    $p->description = '';
 		};
 		return $projects;
 	}
