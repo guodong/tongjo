@@ -14,17 +14,41 @@ class ProjectHomeController extends BaseController {
 		if (Input::get('userId') != 0)
 		{
 			//$projects = Project::Paginate(10);
-			//$adProjects = [];
+			$adProjects = Project::orderByRaw("RAND()")->get();
+			//return Category::find($adProjects[4]->categorys->first()->fid)->name;
+			for ($i = 0 ; $i <= 2; $i++)
+			{
+				if ($adProjects[$i]->categorys->first()->fid != 0 && $adProjects[$i]->id != 0)
+				{
+					$adProjectList[$i] = array( 'projectId' => $adProjects[$i]->id,
+						'projectName' => $adProjects[$i]->name,
+						'projectImage' => $adProjects[$i]->image,
+						'projectCreatedDate' => date($adProjects[$i]->created_at),
+						'projectEndDate' => $adProjects[$i]->deadline,
+						'projectFounderId' => $adProjects[$i]->user_id,
+						'projectFounderName' => $adProjects[$i]->creator->realname,
+						'projectFounderImage' => $adProjects[$i]->creator->avatar,
+						'projectFounderUniversityId' => $adProjects[$i]->creator->school_id,
+						'projectFounderUniversityName' => School::find($adProjects[$i]->creator->school_id)->name,
+						'projectLabel' => Category::find($adProjects[$i]->categorys->first()->fid)->name,
+						'projectText' => $adProjects[$i]->description,
+						'teamNumber' => count($adProjects[$i]->teams),
+						'commentNumber' => count($adProjects[$i]->comments));
+				}
+				
+			}
+			
 			$projectList = NULL;			
 			if ($categoryId == 0)
 			{
 				if ($customId == 1)
 				{
-					$projects = Project::orderBy('viewcount', 'desc')->get();					
-					for ($i = 0 ; $i < 9; $i++)
+					$projects = Project::orderByRaw("RAND()")->get();
+					for ($i = 0 ; $i <= 9; $i++)
 					{
-						$projectCreator = $projects[$i]->creator;
-						$projectList[$i] = array( 'projectID' => $projects[$i]->id,
+						if ($projects[$i]->categorys!= NULL && $projects[$i]->categorys->first()->fid != 0 && $projects[$i]->id != 0)
+						{
+							$projectList[$i] = array( 'projectId' => $projects[$i]->id,
 								'projectName' => $projects[$i]->name,
 								'projectImage' => $projects[$i]->image,
 								'projectCreatedDate' => date($projects[$i]->created_at),
@@ -34,10 +58,11 @@ class ProjectHomeController extends BaseController {
 								'projectFounderImage' => $projects[$i]->creator->avatar,
 								'projectFounderUniversityId' => $projects[$i]->creator->school_id,
 								'projectFounderUniversityName' => School::find($projects[$i]->creator->school_id)->name,
-								'projectLabel' => $projects[$i]->categorys->first()->name,
+								'projectLabel' => Category::find($projects[$i]->categorys->first()->fid)->name,
 								'projectText' => $projects[$i]->description,
 								'teamNumber' => count($projects[$i]->teams),
 								'commentNumber' => count($projects[$i]->comments));
+						}
 					}
 					
 				}
@@ -46,8 +71,7 @@ class ProjectHomeController extends BaseController {
 					$projects = Project::orderBy('created_at', 'desc')->get();
 					for ($i = 0 ; $i <= 9; $i++)
 					{
-						$projectCreator = $projects[$i]->creator;
-						$projectList[$i] = array( 'projectID' => $projects[$i]->id,
+						$projectList[$i] = array( 'projectId' => $projects[$i]->id,
 								'projectName' => $projects[$i]->name,
 								'projectImage' => $projects[$i]->image,
 								'projectCreatedDate' => date($projects[$i]->created_at),
@@ -57,7 +81,7 @@ class ProjectHomeController extends BaseController {
 								'projectFounderImage' => $projects[$i]->creator->avatar,
 								'projectFounderUniversityId' => $projects[$i]->creator->school_id,
 								'projectFounderUniversityName' => School::find($projects[$i]->creator->school_id)->name,
-								'projectLabel' => $projects[$i]->categorys->first()->name,
+								'projectLabel' => Category::find($projects[$i]->categorys->first()->fid)->name,
 								'projectText' => $projects[$i]->description,
 								'teamNumber' => count($projects[$i]->teams),
 								'commentNumber' => count($projects[$i]->comments));
@@ -65,11 +89,10 @@ class ProjectHomeController extends BaseController {
 				}
 				else if ($customId == 3)
 				{
-					$projects = Project::all();
+					$projects = Project::orderBy('viewcount', 'desc')->get();
 					for ($i = 0 ; $i <= 9; $i++)
 					{
-						$projectCreator = $projects[$i]->creator;
-						$projectList[$i] = array( 'projectID' => $projects[$i]->id,
+						$projectList[$i] = array( 'projectId' => $projects[$i]->id,
 								'projectName' => $projects[$i]->name,
 								'projectImage' => $projects[$i]->image,
 								'projectCreatedDate' => date($projects[$i]->created_at),
@@ -79,7 +102,7 @@ class ProjectHomeController extends BaseController {
 								'projectFounderImage' => $projects[$i]->creator->avatar,
 								'projectFounderUniversityId' => $projects[$i]->creator->school_id,
 								'projectFounderUniversityName' => School::find($projects[$i]->creator->school_id)->name,
-								'projectLabel' => $projects[$i]->categorys->first()->name,
+								'projectLabel' => Category::find($projects[$i]->categorys->first()->fid)->name,
 								'projectText' => $projects[$i]->description,
 								'teamNumber' => count($projects[$i]->teams),
 								'commentNumber' => count($projects[$i]->comments));
@@ -87,11 +110,10 @@ class ProjectHomeController extends BaseController {
 				}
 				else if ($customId == 4)
 				{
-					$projects = Project::all();
+					$projects = Project::orderByRaw("RAND()")->get();
 					for ($i = 0 ; $i <= 9; $i++)
 					{
-						$projectCreator = $projects[$i]->creator;
-						$projectList[$i] = array( 'projectID' => $projects[$i]->id,
+						$projectList[$i] = array( 'projectId' => $projects[$i]->id,
 								'projectName' => $projects[$i]->name,
 								'projectImage' => $projects[$i]->image,
 								'projectCreatedDate' => date($projects[$i]->created_at),
@@ -101,7 +123,7 @@ class ProjectHomeController extends BaseController {
 								'projectFounderImage' => $projects[$i]->creator->avatar,
 								'projectFounderUniversityId' => $projects[$i]->creator->school_id,
 								'projectFounderUniversityName' => School::find($projects[$i]->creator->school_id)->name,
-								'projectLabel' => $projects[$i]->categorys->first()->name,
+								'projectLabel' => Category::find($projects[$i]->categorys->first()->fid)->name,
 								'projectText' => $projects[$i]->description,
 								'teamNumber' => count($projects[$i]->teams),
 								'commentNumber' => count($projects[$i]->comments));
@@ -115,12 +137,18 @@ class ProjectHomeController extends BaseController {
 			
 			else if ($categoryId != 0 && $categoryId != NULL && $customId == 0)
 			{
-				$projects = $category->projects;
+				$projects = [];
+	    		if (count($category->children)){
+	        		for ($i = 0 ; $i <= count($category->children)-1; $i++)
+	        			$projects[$i] = Project::find($category->children[$i]->id);
+	        	}
+	    		else{
+	        		$projects = $category->projects->toArray();
+	    		}
 				$count = count($projects);
 				for ($i = 0 ; $i <= $count-1; $i++)
 				{
-					$projectCreator = $projects[$i]->creator;
-					$projectList[$i] = array( 'projectID' => $projects[$i]->id,
+					$projectList[$i] = array( 'projectId' => $projects[$i]->id,
 							'projectName' => $projects[$i]->name,
 							'projectImage' => $projects[$i]->image,
 							'projectCreatedDate' => date($projects[$i]->created_at),
@@ -130,7 +158,7 @@ class ProjectHomeController extends BaseController {
 							'projectFounderImage' => $projects[$i]->creator->avatar,
 							'projectFounderUniversityId' => $projects[$i]->creator->school_id,
 							'projectFounderUniversityName' => School::find($projects[$i]->creator->school_id)->name,
-							'projectLabel' => $projects[$i]->categorys->first()->name,
+							'projectLabel' => Category::find($categoryId)->name,
 							'projectText' => $projects[$i]->description,
 							'teamNumber' => count($projects[$i]->teams),
 							'commentNumber' => count($projects[$i]->comments));
@@ -145,12 +173,20 @@ class ProjectHomeController extends BaseController {
 				$projectList = NULL;
 			}
 			
-			if ($projectList){
+			if ($projectList && $categoryId == 0){
 				$response = array( 'result' => array('code' =>0, 'message' => 'no problem'), 
 								   'categoryId' => $categoryId,
 								   'customId' => $customId,
-							       'adProjects' => $adProjects,
+							       'adProjects' => $adProjectList,
 							       'projectList' => $projectList);
+				return Responses::json($response);
+			}
+			else if ($projectList && $categoryId != 0 && $categoryId != NULL)
+			{
+				$response = array( 'result' => array('code' =>0, 'message' => 'no problem'),
+						'categoryId' => $categoryId,
+						'customId' => $customId,
+						'projectList' => $projectList);
 				return Responses::json($response);
 			}
 			else{

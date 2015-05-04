@@ -22,6 +22,7 @@ class HomePageController extends BaseController {
 		}
 		$teamcount =  count($joinedteams);
 		$projectcount = count($joinedprojects);
+		$labelArray = [];
 		
 		if ($user)
 		{
@@ -33,9 +34,17 @@ class HomePageController extends BaseController {
 				'userUniversity' => School::find($user->school_id)->name,
 				'userImage' => $user->avatar
 			);
+			$userLabelCount = count($user->tags);
+			if ($userLabelCount)
+				for ($i = 0; $i < $userLabelCount; $i++)
+					$labelArray[$i] = array(
+						'labelId' => $user->tags[$i]->id,
+						'labelName' => Tag::find($user->tags[$i]->id)->name
+					);
 		}
+		
 		$userProjectList = NULL;
-		$userTeamList = NULL;
+		//$userTeamList = NULL;
 		if ($projectcount != 0)
 		{
 			for ($j = 0; $j <= $projectcount - 1; $j++)
@@ -60,7 +69,7 @@ class HomePageController extends BaseController {
 				$userProjectList = $joinedProjectList;	
 		}
 		
-		if ($teamcount != 0)
+		/*if ($teamcount != 0)
 		{
 			for ($l = 0; $l <= count($joinedteams) - 1; $l++)
 			{
@@ -79,34 +88,40 @@ class HomePageController extends BaseController {
 						'teamDescription' => $joinedteams[$l]->description);
 				}
 				$userTeamList = $joinedTeamList;	
-		}
+		}*/
 		if ($user)
 		{
-			if ($userProjectList && $userTeamList)
+			if ($userProjectList)
 			{
 				$response = array('result' => array('code' =>0, 'message' => 'no problem'),
 						'userBasicInfo' => $userinfo,
 						'projectCount' => $projectcount,
 						'userProjectList' => $userProjectList,
-						'teamCount' => $teamcount,
-						'userTeamList' => $userTeamList);
+						//'teamCount' => $teamcount,
+						//'userTeamList' => $userTeamList,
+						'userLabelCount' => $userLabelCount,
+						'userLabelArr' => $labelArray);
 						return Responses::json($response);
 			}
-			else if ($userTeamList)
+			/*else if ($userTeamList)
 			{
 				$response = array('result' => array('code' =>0, 'message' => 'no problem'),
 						'userBasicInfo' => $userinfo,
 						'projectCount' => $projectcount,		
 						'teamCount' => $teamcount,
-						'userTeamList' => $userTeamList);			
+						'userTeamList' => $userTeamList,
+						'userLabelCount' => $userLabelCount,
+						'userLabelArr' => $labelArray);
 				return Responses::json($response);
-			}
+			}*/
 			else
 			{
 				$response = array('result' => array('code' =>0, 'message' => 'no problem'),
 						'userBasicInfo' => $userinfo,
 						'projectCount' => $projectcount,
-						'teamCount' => $teamcount);
+						//'teamCount' => $teamcount,
+						'userLabelCount' => $userLabelCount,
+						'userLabelArr' => $labelArray);
 				return Responses::json($response);
 			}
 				
