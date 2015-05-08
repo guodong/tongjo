@@ -1,5 +1,5 @@
 <?php
-class Message extends Eloquent {
+class Message extends BaseModel {
 	protected $table = 'message';
 	protected $fillable = array('from_id', 'to_id', 'title','content');
 

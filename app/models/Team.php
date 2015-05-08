@@ -1,5 +1,5 @@
 <?php
-class Team extends Eloquent {
+class Team extends BaseModel {
 	protected $table = 'team';
 
 	protected $fillable = array('name', 'user_id', 'project_id', 'is_solo', 'teammember_all', 'teammember_current', 'description', 'is_signup', 'signup_time', 'status');

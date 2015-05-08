@@ -1,5 +1,5 @@
 <?php
-class Tag extends Eloquent {
+class Tag extends BaseModel {
 	protected $table = 'tag';
 	protected $fillable = array('name');
 	

@@ -1,5 +1,5 @@
 <?php
-class Reply extends Eloquent {
+class Reply extends BaseModel {
 	protected $table = 'reply';
 	protected $fillable = array('user_id', 'message_id', 'content');
 

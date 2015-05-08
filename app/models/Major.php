@@ -1,5 +1,5 @@
 <?php
-class Major extends Eloquent {
+class Major extends BaseModel {
 	protected $table = 'school';
 	
 }
