@@ -21,6 +21,7 @@ class ProjectController extends BaseController {
 		    $p->teams_count = $p->teams->count();
 		    $p->users;
 		    $p->users_count = $p->users->count();
+		    $p->description = '';
 		};
 		return $projects;
 	}
@@ -37,6 +38,13 @@ class ProjectController extends BaseController {
 	    $project->tags;
 	    $project->teams->each(function($t){
 	        $t->members_count = $t->members->count();
+	        $permit_count = 0;
+	        foreach ($t->members as $m){
+	            if ($m->pivot->status == 'permited'){
+	                $permit_count++;
+	            }
+	        }
+	        $t->members_permited_count = $permit_count;
 	    });
 	    $project->users;
 	    foreach ($project->comments as $v){

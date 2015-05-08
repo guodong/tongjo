@@ -8,6 +8,9 @@ class UserTypeProjectController extends BaseController {
 	    $user = User::find($user_id);
 	    if ($type == 'created'){
 	        $projects = $user->createdProjects;
+	        foreach ($projects as $p){
+	            $p->description = '';
+	        }
 	        return $projects->toJson();
 	    }else if($type == 'joined'){
 	        // 团队参加
@@ -23,6 +26,9 @@ class UserTypeProjectController extends BaseController {
 	            $v->type = 'solo';
 	            $v->joinstatus = $v->pivot->status;
 	            $projects[] = $v;
+	        }
+	        foreach ($projects as $p){
+	            $p->description = '';
 	        }
 		  return json_encode($projects);
 	    }

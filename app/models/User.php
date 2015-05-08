@@ -1,5 +1,5 @@
 <?php
-class User extends Eloquent {
+class User extends BaseModel {
 	protected $table = 'user';
 
 	protected $hidden = array('password', 'email_verify_code');

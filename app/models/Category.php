@@ -1,5 +1,5 @@
 <?php
-class Category extends Eloquent {
+class Category extends BaseModel {
 	protected $table = 'category';
 	protected $fillable = array('name', 'user_id', 'type', 'dsc', 'deadline', 'parttype');
 	

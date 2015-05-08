@@ -14,6 +14,9 @@ class CategoryProjectController extends BaseController {
 	    }else{
 	        $projects = $category->projects->toArray();
 	    }
+	    foreach ($projects as &$p){
+	        $p['description'] = '';
+	    }
 	    return $projects;
 	}
 	

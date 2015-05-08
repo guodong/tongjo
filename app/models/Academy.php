@@ -1,5 +1,5 @@
 <?php
-class Academy extends Eloquent {
+class Academy extends BaseModel {
 	protected $table = 'school';
 	public function majors()
 	{

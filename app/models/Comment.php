@@ -1,5 +1,5 @@
 <?php
-class Comment extends Eloquent {
+class Comment extends BaseModel {
 	protected $table = 'comment';
 	protected $fillable = array('user_id', 'project_id', 'content');
 

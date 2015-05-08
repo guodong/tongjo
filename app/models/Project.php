@@ -1,5 +1,5 @@
 <?php
-class Project extends Eloquent {
+class Project extends BaseModel {
 	protected $table = 'project';
 	protected $fillable = array('name', 'user_id', 'type', 'image', 'description', 'sponsor', 'deadline', 'parttype', 'is_open');
 

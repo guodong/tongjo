@@ -1,5 +1,5 @@
 <?php
-class Experience extends Eloquent {
+class Experience extends BaseModel {
 	protected $table = 'experience';
 	protected $fillable = array('from', 'to', 'user_id','content');
 
