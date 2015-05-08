@@ -5,7 +5,7 @@ class Category extends Eloquent {
 	
 	public function projects()
 	{
-	    return $this->belongsToMany('Project', 'project_category');
+	    return $this->belongstoMany('Project', 'project_category');
 	}
 	
 	public function children()

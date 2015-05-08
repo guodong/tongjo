@@ -139,30 +139,34 @@ class ProjectHomeController extends BaseController {
 			{
 				$projects = [];
 	    		if (count($category->children)){
-	        		for ($i = 0 ; $i <= count($category->children)-1; $i++)
-	        			$projects[$i] = Project::find($category->children[$i]->id);
+	    			for ($i = 0; $i < count($category->children); $i++)
+	    				if (count($category->children[$i]->projects))
+	    					for ($j = 0; $j < count($category->children[$i]->projects); $j++)
+	    	        			$projects = array_merge($projects, array($category->children[$i]->projects[$j]));
 	        	}
 	    		else{
 	        		$projects = $category->projects->toArray();
 	    		}
+	    		
 				$count = count($projects);
-				for ($i = 0 ; $i <= $count-1; $i++)
-				{
-					$projectList[$i] = array( 'projectId' => $projects[$i]->id,
-							'projectName' => $projects[$i]->name,
-							'projectImage' => $projects[$i]->image,
-							'projectCreatedDate' => date($projects[$i]->created_at),
-							'projectEndDate' => $projects[$i]->deadline,
-							'projectFounderId' => $projects[$i]->user_id,
-							'projectFounderName' => $projects[$i]->creator->realname,
-							'projectFounderImage' => $projects[$i]->creator->avatar,
-							'projectFounderUniversityId' => $projects[$i]->creator->school_id,
-							'projectFounderUniversityName' => School::find($projects[$i]->creator->school_id)->name,
-							'projectLabel' => Category::find($categoryId)->name,
-							'projectText' => $projects[$i]->description,
-							'teamNumber' => count($projects[$i]->teams),
-							'commentNumber' => count($projects[$i]->comments));
-				}
+				if ($count > 0 )
+					for ($i = 0 ; $i <= $count-1; $i++)
+					{
+						$projectList[$i] = array( 'projectId' => $projects[$i]->id,
+								'projectName' => $projects[$i]->name,
+								'projectImage' => $projects[$i]->image,
+								'projectCreatedDate' => date($projects[$i]->created_at),
+								'projectEndDate' => $projects[$i]->deadline,
+								'projectFounderId' => $projects[$i]->user_id,
+								'projectFounderName' => $projects[$i]->creator->realname,
+								'projectFounderImage' => $projects[$i]->creator->avatar,
+								'projectFounderUniversityId' => $projects[$i]->creator->school_id,
+								'projectFounderUniversityName' => School::find($projects[$i]->creator->school_id)->name,
+								'projectLabel' => Category::find($categoryId)->name,
+								'projectText' => $projects[$i]->description,
+								'teamNumber' => count($projects[$i]->teams),
+								'commentNumber' => count($projects[$i]->comments));
+					}
 			}
 			
 			else if ($categoryId != 0 && $categoryId != NULL && $customId != 0) {

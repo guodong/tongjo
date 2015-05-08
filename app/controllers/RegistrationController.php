@@ -6,16 +6,19 @@ class RegistrationController extends BaseController {
 	
 	public function store()
 	{
-		$_POST['password'] = md5($_POST['password']);
 		$user = User::find($_POST);
 		if (json_decode($user) != NULL)
 			return Responses::json(array('result' => array('code' =>2, 'message' => 'problem 2')));
 		else
 		{
-	    	$user = User::create($_POST);
+			//$_POST['hxusername'] = "hx_" . $_POST['email'];
+			//$_POST['password'] = $_POST['password'];
+	    	$user = User::create($_POST);  	
 			if (isset($user->email) && isset($user->password))
 			{
-				$user->hxid = "hx_".(string)$user->id;
+				$user->hxusername = "hx_".(string)$user->id;
+				$user->hxpassword = $user->password;
+				$user->save();
 				function _curl_request($url, $body, $header = array(), $method = "POST")
 				{
 					array_push($header, 'Accept:application/json');
@@ -71,8 +74,8 @@ class RegistrationController extends BaseController {
 				
 				$formauthreg="https://a1.easemob.com/easemob-demo/chatdemoui/users";
 				$regbody=array(
-						"username"=>$user->hxid,
-						"password"=>$user->password
+						"username"=>$user->hxusername,
+						"password"=>$user->hxpassword
 				);
 				$pareg=json_encode($regbody);
 				
@@ -104,9 +107,9 @@ class RegistrationController extends BaseController {
 				if ($res['entities'] != NULL)
 					return Responses::json(array(
 					'result' => array(
-					'code' =>0, 'message' => 'no problem'),
+					'code' =>0, 'message' => 'no problem',
 					'userId' => $user->id
-					));
+					)));
 			}
 			else 
 				return Responses::json(array('result' => array('code' =>2, 'message' => 'problem 2')));

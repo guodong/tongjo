@@ -21,7 +21,9 @@ class LoginController extends BaseController {
 		    			'userRealName'=> $user->realname, 
 		    			'userGender'=> $user->gender,
 		    			'userUniversity'=> School::find($user->school_id)->name,
-		    			'userImage'=> $user->avatar
+		    			'userImage'=> $user->avatar,
+		    			'hxUsername' => $user->hxusername,
+		    			'hxPassword' => $user->hxpassword
 		    			)
 		    		);
 			return Responses::json($response);

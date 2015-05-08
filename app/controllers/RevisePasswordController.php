@@ -9,11 +9,11 @@ class RevisePasswordController extends BaseController {
 	    //修改密码
 	    //$this->auth(Input::get('userId'));
 	    $user = User::find(Input::get('userId'));
-	    if ($user->password != md5(Input::get('passwordOld')))
+	    if ($user->password != Input::get('passwordOld'))
 	       return Responses::json(array('result' => array('code' =>1, 'message' => 'problem 1')));   
 	    else 
 	    {
-	    	$user->password = md5(Input::get('passwordNew'));
+	    	$user->password = Input::get('passwordNew');
 	        $user->save();
 	        return Responses::json(array('result' => array('code' =>0, 'message' => 'no problem')));
 	    }
