@@ -11,13 +11,14 @@ class RegistrationController extends BaseController {
 			return Responses::json(array('result' => array('code' =>2, 'message' => 'problem 2')));
 		else
 		{
-			//$_POST['hxusername'] = "hx_" . $_POST['email'];
-			//$_POST['password'] = $_POST['password'];
 	    	$user = User::create($_POST);  	
 			if (isset($user->email) && isset($user->password))
 			{
 				$user->hxusername = "hx_".(string)$user->id;
 				$user->hxpassword = $user->password;
+				$user->realname = '同志'.rand(1, 9999);
+				$user->school_id = 1;
+				$user->avatar = 'sysavatar/'.rand(1, 40).'.jpg';
 				$user->save();
 				function _curl_request($url, $body, $header = array(), $method = "POST")
 				{
@@ -107,9 +108,9 @@ class RegistrationController extends BaseController {
 				if ($res['entities'] != NULL)
 					return Responses::json(array(
 					'result' => array(
-					'code' =>0, 'message' => 'no problem',
+					'code' =>0, 'message' => 'no problem'),
 					'userId' => $user->id
-					)));
+					));
 			}
 			else 
 				return Responses::json(array('result' => array('code' =>2, 'message' => 'problem 2')));
