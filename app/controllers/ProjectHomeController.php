@@ -35,6 +35,8 @@ class ProjectHomeController extends BaseController {
 						'teamNumber' => count($adProjects[$i]->teams),
 						'commentNumber' => count($adProjects[$i]->comments));
 				}
+				else 
+					$i--;
 				
 			}
 			
@@ -63,6 +65,8 @@ class ProjectHomeController extends BaseController {
 								'teamNumber' => count($projects[$i]->teams),
 								'commentNumber' => count($projects[$i]->comments));
 						}
+						else 
+							$i--;
 					}
 					
 				}

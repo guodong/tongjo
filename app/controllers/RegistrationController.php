@@ -14,7 +14,8 @@ class RegistrationController extends BaseController {
 	    	$user = User::create($_POST);  	
 			if (isset($user->email) && isset($user->password))
 			{
-				$user->hxusername = "hx_".(string)$user->id;
+				//$user->hxusername = "hx_".(string)$user->id;
+				$user->hxusername = "hx_123";
 				$user->hxpassword = $user->password;
 				$user->realname = '同志'.rand(1, 9999);
 				$user->school_id = 1;
@@ -101,6 +102,7 @@ class RegistrationController extends BaseController {
 				$ret = curl_exec($ch);
 				$err = curl_error($ch);
 				curl_close($ch);
+				return $ret;
 				if ($err) {
 					return Responses::json(array('result' => array('code' =>1, 'message' => 'problem 1')));
 				}
