@@ -5,9 +5,10 @@ class UserAvatarController extends BaseController {
 
 	public function store($user_id)
 	{	    
-	    $post_input = 'php://input';
+	    $post_input = 'php://input';   
 	    $save_path = PATH_BASE.'public/files/';
 	    $postdata = file_get_contents( $post_input );
+	    return $post_input;
 	    
 	    if ( isset( $postdata ) && strlen( $postdata ) > 0 ) {
 	        $fn = uniqid().'jpg';

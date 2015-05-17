@@ -18,6 +18,8 @@ Route::get('/', function()
 Route::resource('apphome', 'AppHomeController');
 Route::resource('projecthome', 'ProjectHomeController');
 Route::resource('user', 'UserController');
+Route::resource('avatar', 'AvatarController');
+Route::resource('userinfo', 'UserInfoController');
 Route::resource('registration', 'RegistrationController');
 Route::resource('project', 'ProjectController');
 Route::resource('image', 'ImageController');

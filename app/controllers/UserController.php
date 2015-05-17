@@ -81,7 +81,7 @@ class UserController extends BaseController {
 	    	return $ret;
 	    }
 	    	
-	    $formgettoken="https://a1.easemob.com/easemob-demo/chatdemoui/token";
+	    $formgettoken="https://a1.easemob.com/tongjo/tongjo/token";
 	    $body=array(
 	    		"grant_type"=>"client_credentials",
 	    		"client_id"=>"YXA6VP5zQMolEeS6LregkdHd4g",
@@ -93,7 +93,7 @@ class UserController extends BaseController {
 	    $tokenResult =  json_decode($res, true);
 	    $access_token = $tokenResult['access_token'];
 	    
-	    $formauthreg="https://a1.easemob.com/easemob-demo/chatdemoui/users";
+	    $formauthreg="https://a1.easemob.com/tongjo/tongjo/users";
 	    $regbody=array(
 	    		"username"=>$user->hxusername,
 	    		"password"=>$user->hxpassword
@@ -103,7 +103,7 @@ class UserController extends BaseController {
 	    $header = array();
 	    array_push($header, 'Accept:application/json');
 	    array_push($header, 'Content-Type:application/json');
-	    array_push($header, $access_token);
+	    array_push($header, "Authorization: Bearer " . $access_token);
 	    
 	    $ch = curl_init();
 	    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);

@@ -14,8 +14,7 @@ class RegistrationController extends BaseController {
 	    	$user = User::create($_POST);  	
 			if (isset($user->email) && isset($user->password))
 			{
-				//$user->hxusername = "hx_".(string)$user->id;
-				$user->hxusername = "hx_123";
+				$user->hxusername = "hx_".(string)$user->id;
 				$user->hxpassword = $user->password;
 				$user->realname = '同志'.rand(1, 9999);
 				$user->school_id = 1;
@@ -62,7 +61,7 @@ class RegistrationController extends BaseController {
 					return $ret;
 				}
 			
-				$formgettoken="https://a1.easemob.com/easemob-demo/chatdemoui/token";
+				$formgettoken="https://a1.easemob.com/tongjo/tongjo/token";
 				$body=array(
 						"grant_type"=>"client_credentials",
 						"client_id"=>"YXA6VP5zQMolEeS6LregkdHd4g",
@@ -74,7 +73,7 @@ class RegistrationController extends BaseController {
 				$tokenResult =  json_decode($res, true);
 				$access_token = $tokenResult['access_token'];
 				
-				$formauthreg="https://a1.easemob.com/easemob-demo/chatdemoui/users";
+				$formauthreg="https://a1.easemob.com/tongjo/tongjo/users";
 				$regbody=array(
 						"username"=>$user->hxusername,
 						"password"=>$user->hxpassword
@@ -84,7 +83,7 @@ class RegistrationController extends BaseController {
 				$header = array();
 				array_push($header, 'Accept:application/json');
 				array_push($header, 'Content-Type:application/json');
-				array_push($header, $access_token);	
+				array_push($header, "Authorization: Bearer " . $access_token);	
 				
 				$ch = curl_init();
 				curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
@@ -102,7 +101,6 @@ class RegistrationController extends BaseController {
 				$ret = curl_exec($ch);
 				$err = curl_error($ch);
 				curl_close($ch);
-				return $ret;
 				if ($err) {
 					return Responses::json(array('result' => array('code' =>1, 'message' => 'problem 1')));
 				}
